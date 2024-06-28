@@ -12,16 +12,22 @@ import RealityKit
 class ArViewModel {
     var arMode: ArMode = .AR
     let tileHeight: Float = 0.001
-    let tileWidth: Float =  0.05
+    let tileWidth: Float =  0.08
     var width: Int
     var length: Int
     
     var worldEntity: Entity = Entity()
-    var arWorldWasCreated: Bool = false
+    private var arWorldWasCreated: Bool = false
     
     init(width: Int, length: Int) {
         self.width = width
         self.length = length
+        
+        addPlantToPosition(widthIndex: 0, lenghtIndex: 0, plant: Sunflower())
+        addPlantToPosition(widthIndex: 0, lenghtIndex: 1, plant: Sunflower())
+        addPlantToPosition(widthIndex: 0, lenghtIndex: 2, plant: BasicPlant())
+        addPlantToPosition(widthIndex: 0, lenghtIndex: 3, plant: Sunflower())
+        addPlantToPosition(widthIndex: 0, lenghtIndex: 4, plant: BasicPlant())
     }
     
     func toggleArMode() {
@@ -33,7 +39,7 @@ class ArViewModel {
     }
     
     //AR Functions
-    func createArWorld() {
+    private func createArWorld() {
         let floorTileMesh = MeshResource.generateBox(width: tileWidth, height: tileHeight, depth: tileWidth)
         
         for i in 0...width-1 {
@@ -44,6 +50,7 @@ class ArViewModel {
             }
         }
     }
+    
     
     private func getColorFloorTile(widthIndex: Int, lenghtIndex: Int) -> SimpleMaterial {
         let floorTileMaterial = SimpleMaterial(color: SimpleMaterial.Color(named: "gras_dark") ?? .gray, roughness: 0.5, isMetallic: true)
@@ -62,6 +69,16 @@ class ArViewModel {
                 return floorTileMaterial
             }
         }
+    }
+    
+    func addPlantToPosition(widthIndex: Int, lenghtIndex: Int, plant: Plant) {
+        guard let modelEntity = plant.createPlant() else {
+            print("Failed to create plant")
+            return
+        }
+        
+        modelEntity.position = [tileWidth*Float(widthIndex),0+tileHeight,tileWidth*Float(lenghtIndex)]
+        worldEntity.addChild(modelEntity)
     }
     
     func anchorWorld(arView: ARView, anchor: AnchorEntity) {
