@@ -41,7 +41,7 @@ class ArViewModel {
         
         addPlantToPosition(widthIndex: 0, lenghtIndex: 0, plant: Sunflower())
         addPlantToPosition(widthIndex: 0, lenghtIndex: 1, plant: Sunflower())
-        addPlantToPosition(widthIndex: 0, lenghtIndex: 2, plant: BasicPlant())
+//        addPlantToPosition(widthIndex: 0, lenghtIndex: 2, plant: BasicPlant())
         addPlantToPosition(widthIndex: 0, lenghtIndex: 3, plant: Sunflower())
         addPlantToPosition(widthIndex: 0, lenghtIndex: 4, plant: BasicPlant())
         
@@ -55,7 +55,7 @@ class ArViewModel {
     
     private func checkForCollision() {
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) {_ in
-//            print("Check Collision")
+            self.removeProjectilesThatLeftField()
         }
     }
     
@@ -75,8 +75,16 @@ class ArViewModel {
         }
     }
     
-    func shootPlants() {
-        
+    func removeProjectilesThatLeftField() {
+        for laneIndex in 0..<projectiles.count {
+            projectiles[laneIndex].removeAll { projectile in
+                if(projectile.position.x == (self.tileWidth * Float(self.width))) {
+                    self.worldEntity.removeChild(projectile)
+                    return true
+                }
+                return false
+            }
+        }
     }
     
     func toggleArMode() {
