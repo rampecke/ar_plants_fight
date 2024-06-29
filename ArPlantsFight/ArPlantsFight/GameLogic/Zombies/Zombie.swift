@@ -11,7 +11,7 @@ import RealityKit
 @Observable
 class Zombie {
     var liveAmount: Int
-    var movingPace: Double
+    var movingPace: TimeInterval
     var dmgAmountHit: Int
     var startedMoving: Bool = false
     

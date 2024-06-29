@@ -21,6 +21,7 @@ class ArViewModel {
     
     var zombieEntities: [[Zombie]] = []
     var plantEntities: [[Plant?]] = []
+    var projectiles: [[Entity]] = []
     
     init(width: Int, length: Int) {
         self.width = width
@@ -28,6 +29,7 @@ class ArViewModel {
         
         for _ in 0..<length {
             zombieEntities.append([])
+            self.projectiles.append([])
         }
         
         for i in 0..<length {
@@ -44,10 +46,17 @@ class ArViewModel {
         addPlantToPosition(widthIndex: 0, lenghtIndex: 4, plant: BasicPlant())
         
         spawnZombieAtLane(laneNumber: 0, zombie: BucketHeadZombie())
-        spawnZombieAtLane(laneNumber: 1, zombie: BucketHeadZombie())
-        spawnZombieAtLane(laneNumber: 2, zombie: BucketHeadZombie())
-        spawnZombieAtLane(laneNumber: 3, zombie: BucketHeadZombie())
-        spawnZombieAtLane(laneNumber: 4, zombie: BucketHeadZombie())
+//        spawnZombieAtLane(laneNumber: 1, zombie: BucketHeadZombie())
+//        spawnZombieAtLane(laneNumber: 2, zombie: BucketHeadZombie())
+//        spawnZombieAtLane(laneNumber: 3, zombie: BucketHeadZombie())
+//        spawnZombieAtLane(laneNumber: 4, zombie: BucketHeadZombie())
+        checkForCollision()
+    }
+    
+    private func checkForCollision() {
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) {_ in
+//            print("Check Collision")
+        }
     }
     
     func moveZombies() {
@@ -55,15 +64,19 @@ class ArViewModel {
             lane.forEach {
                 if !$0.startedMoving {
                     let zombieEntity = $0.zombieEntity
+                    $0.startedMoving = true
                     zombieEntity.move(to: Transform(
                         scale: zombieEntity.transform.scale,
                         rotation: zombieEntity.transform.rotation,
                         translation: [0, tileHeight, tileWidth * Float(laneNumber)]
-                    ), relativeTo: worldEntity, duration: $0.movingPace)
-                    $0.startedMoving = true
+                    ), relativeTo: worldEntity, duration: $0.movingPace, timingFunction: .linear)
                 }
             }
         }
+    }
+    
+    func shootPlants() {
+        
     }
     
     func toggleArMode() {
@@ -109,7 +122,7 @@ class ArViewModel {
     
     func addPlantToPosition(widthIndex: Int, lenghtIndex: Int, plant: Plant) {
         //TODO: Check if the position exists
-        guard let modelEntity = plant.createPlant() else {
+        guard let modelEntity = plant.createPlant(widthIndex: widthIndex, lenghtIndex: lenghtIndex) else {
             print("Failed to create plant")
             return
         }
@@ -118,6 +131,9 @@ class ArViewModel {
         
         modelEntity.position = [tileWidth*Float(widthIndex),0+tileHeight,tileWidth*Float(lenghtIndex)]
         worldEntity.addChild(modelEntity)
+        
+        plant.shooting = true
+        plant.shootProjectiles(viewModel: self)
     }
     
     func spawnZombieAtLane(laneNumber: Int, zombie: Zombie) {

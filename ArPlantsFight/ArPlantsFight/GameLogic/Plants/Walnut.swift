@@ -11,10 +11,14 @@ import RealityKit
 @Observable
 class Walnut: Plant {
     required init() {
-        super.init(liveAmount: 300, expense: 100, pace: 0, dmgAmountProjectile: 0)
+        super.init(liveAmount: 300, expense: 100, pace: 0, projectileMovementSpeed: 0, dmgAmountProjectile: 0)
     }
     
-    override func createPlant() -> Entity? {
+    override func createPlant(widthIndex: Int, lenghtIndex: Int) -> Entity? {
         return nil
+    }
+    
+    override func shootProjectiles(viewModel: ArViewModel) {
+        //does not shoot
     }
 }
