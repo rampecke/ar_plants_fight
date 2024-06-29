@@ -8,6 +8,7 @@
 import Foundation
 import RealityKit
 
+@Observable
 class Walnut: Plant {
     required init() {
         super.init(liveAmount: 300, expense: 100, pace: 0, dmgAmountProjectile: 0)

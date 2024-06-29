@@ -8,6 +8,7 @@
 import Foundation
 import RealityKit
 
+@Observable
 class Sunflower: Plant {
     required init() {
         super.init(liveAmount: 50, expense: 50, pace: 0, dmgAmountProjectile: 0)

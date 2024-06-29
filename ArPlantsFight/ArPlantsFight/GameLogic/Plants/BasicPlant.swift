@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import Combine
 import RealityKit
 
+@Observable
 class BasicPlant: Plant {
     required init() {
         super.init(liveAmount: 100, expense: 50, pace: 1.0, dmgAmountProjectile: 20)

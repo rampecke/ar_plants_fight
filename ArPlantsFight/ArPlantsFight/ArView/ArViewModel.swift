@@ -19,15 +19,51 @@ class ArViewModel {
     var worldEntity: Entity = Entity()
     private var arWorldWasCreated: Bool = false
     
+    var zombieEntities: [[Zombie]] = []
+    var plantEntities: [[Plant?]] = []
+    
     init(width: Int, length: Int) {
         self.width = width
         self.length = length
+        
+        for _ in 0..<length {
+            zombieEntities.append([])
+        }
+        
+        for i in 0..<length {
+            plantEntities.append([])
+            for _ in 0..<width {
+                plantEntities[i].append(nil)
+            }
+        }
         
         addPlantToPosition(widthIndex: 0, lenghtIndex: 0, plant: Sunflower())
         addPlantToPosition(widthIndex: 0, lenghtIndex: 1, plant: Sunflower())
         addPlantToPosition(widthIndex: 0, lenghtIndex: 2, plant: BasicPlant())
         addPlantToPosition(widthIndex: 0, lenghtIndex: 3, plant: Sunflower())
         addPlantToPosition(widthIndex: 0, lenghtIndex: 4, plant: BasicPlant())
+        
+        spawnZombieAtLane(laneNumber: 0, zombie: BucketHeadZombie())
+        spawnZombieAtLane(laneNumber: 1, zombie: BucketHeadZombie())
+        spawnZombieAtLane(laneNumber: 2, zombie: BucketHeadZombie())
+        spawnZombieAtLane(laneNumber: 3, zombie: BucketHeadZombie())
+        spawnZombieAtLane(laneNumber: 4, zombie: BucketHeadZombie())
+    }
+    
+    func moveZombies() {
+        for (laneNumber, lane) in zombieEntities.enumerated() {
+            lane.forEach {
+                if !$0.startedMoving {
+                    let zombieEntity = $0.zombieEntity
+                    zombieEntity.move(to: Transform(
+                        scale: zombieEntity.transform.scale,
+                        rotation: zombieEntity.transform.rotation,
+                        translation: [0, tileHeight, tileWidth * Float(laneNumber)]
+                    ), relativeTo: worldEntity, duration: $0.movingPace)
+                    $0.startedMoving = true
+                }
+            }
+        }
     }
     
     func toggleArMode() {
@@ -72,12 +108,30 @@ class ArViewModel {
     }
     
     func addPlantToPosition(widthIndex: Int, lenghtIndex: Int, plant: Plant) {
+        //TODO: Check if the position exists
         guard let modelEntity = plant.createPlant() else {
             print("Failed to create plant")
             return
         }
         
+        plantEntities[lenghtIndex][widthIndex] = plant
+        
         modelEntity.position = [tileWidth*Float(widthIndex),0+tileHeight,tileWidth*Float(lenghtIndex)]
+        worldEntity.addChild(modelEntity)
+    }
+    
+    func spawnZombieAtLane(laneNumber: Int, zombie: Zombie) {
+        //TODO: Check if the laneNumber exists
+        
+        guard let modelEntity = zombie.createZombie() else {
+            print("Failed to spawn zombie")
+            return
+        }
+        
+        zombieEntities[laneNumber].append(zombie)
+        
+        modelEntity.position = [tileWidth*Float(self.width),0+tileHeight,tileWidth*Float(laneNumber)]
+        modelEntity.transform.rotation = simd_quatf(angle: Float.pi / 2, axis: SIMD3<Float>(0, 1, 0))
         worldEntity.addChild(modelEntity)
     }
     
