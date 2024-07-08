@@ -14,10 +14,13 @@ class ModelLoader {
     private var basicModel: ModelEntity?
     private var walnutModel: ModelEntity?
     
+    private var bucketHeadModel: ModelEntity?
+    
     init() {
         self.sunflowerModel = loadModel(modelName: "Sunflower")
         self.basicModel = loadModel(modelName: "BasePlant")
         self.walnutModel = loadModel(modelName: "Walnut")
+        self.bucketHeadModel = loadModel(modelName: "ZombieBucketHead")
     }
     
     private func loadModel(modelName: String) -> ModelEntity? {
@@ -36,6 +39,18 @@ class ModelLoader {
             walnutModel?.clone(recursive: true)
         case .BasicPlant:
             basicModel?.clone(recursive: true)
+        } else {
+            print("Failed to load model")
+            return nil
+        }
+        
+        return modelEntity
+    }
+    
+    func returnCopyOf(zombieType: ZombieTypes) -> ModelEntity? {
+        guard let modelEntity = switch zombieType {
+        case .BucketHeadZombie:
+            bucketHeadModel?.clone(recursive: true)
         } else {
             print("Failed to load model")
             return nil

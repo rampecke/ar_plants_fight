@@ -29,9 +29,9 @@ class Zombie {
         fatalError("This class cannot be instantiated directly")
     }
     
-    func createZombie(modelName: String) -> ModelEntity? {
+    func createZombie(zombie: ModelEntity?) -> ModelEntity? {
         // Load the USDZ model
-        guard let modelEntity = try? ModelEntity.loadModel(named: modelName) else {
+        guard let modelEntity = zombie else {
             print("Failed to load model")
             return nil
         }
@@ -53,7 +53,7 @@ class Zombie {
         return modelEntity
     }
     
-    func createZombie() -> Entity? {
+    func createZombie(modelLoader: ModelLoader) -> Entity? {
         fatalError("This class cannot create a plant directly")
     }
 }

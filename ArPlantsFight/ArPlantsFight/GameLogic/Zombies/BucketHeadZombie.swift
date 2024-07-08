@@ -15,8 +15,7 @@ class BucketHeadZombie: Zombie{
         super.init(liveAmount: 100, movingPace: duration, dmgAmountHit: 25)
     }
     
-    override func createZombie() -> Entity? {
-        let modelName = "ZombieBucketHead"
-        return super.createZombie(modelName: modelName)
+    override func createZombie(modelLoader: ModelLoader) -> Entity? {
+        return super.createZombie(zombie: modelLoader.returnCopyOf(zombieType: .BucketHeadZombie))
     }
 }

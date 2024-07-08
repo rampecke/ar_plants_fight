@@ -193,7 +193,7 @@ class ArViewModel {
     func spawnZombieAtLane(laneNumber: Int, zombie: Zombie) {
         //TODO: Check if the laneNumber exists
         
-        guard let modelEntity = zombie.createZombie() else {
+        guard let modelEntity = zombie.createZombie(modelLoader: self.modelLoader) else {
             print("Failed to spawn zombie")
             return
         }
@@ -210,4 +210,8 @@ enum PlantTypes {
     case Sunflower
     case Walnut
     case BasicPlant
+}
+
+enum ZombieTypes {
+    case BucketHeadZombie
 }
