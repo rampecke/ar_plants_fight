@@ -12,17 +12,17 @@ struct ContentView : View {
     @State var arViewModel: ArViewModel = ArViewModel(width: 9, length: 5)
     
     var body: some View {
-        HStack{
-            VStack{
-                Button(action: {arViewModel.toggleArMode()}, label: {
-                    Text("ToggleAr")
-                })
-            }
-            
-            if (arViewModel.arMode == .AR) {
-                ArView(arViewModel: arViewModel)
-            } else {
-                NonArView(arViewModel: arViewModel)
+        VStack{
+            ArView(arViewModel: arViewModel)
+            ScrollView(.horizontal){
+                HStack{
+                    Button(action: {arViewModel.selectedPlant = .BasicPlant}, label: {
+                        Text("BasicPlant")
+                    })
+                    Button(action: {arViewModel.selectedPlant = .Sunflower}, label: {
+                        Text("Sunflower")
+                    })
+                }
             }
         }
     }

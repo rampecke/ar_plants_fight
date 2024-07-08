@@ -38,10 +38,8 @@ class Plant {
         fatalError("This class cannot be instantiated directly")
     }
     
-    func createPlant(modelName: String, widthIndex: Int, lenghtIndex: Int) -> ModelEntity? {
-        // Load the USDZ model
-        guard let modelEntity = try? ModelEntity.loadModel(named: modelName) else {
-            print("Failed to load model")
+    func createPlant(plant: ModelEntity?, widthIndex: Int, lenghtIndex: Int) -> ModelEntity? {
+        guard let modelEntity = plant else {
             return nil
         }
         
@@ -63,7 +61,7 @@ class Plant {
         return modelEntity
     }
     
-    func createPlant(widthIndex: Int, lenghtIndex: Int) -> ModelEntity? {
+    func createPlant(modelLoader: ModelLoader, widthIndex: Int, lenghtIndex: Int) -> ModelEntity? {
         fatalError("This class cannot create a plant directly")
     }
     

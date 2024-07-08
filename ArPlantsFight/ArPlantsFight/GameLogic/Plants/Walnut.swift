@@ -14,8 +14,8 @@ class Walnut: Plant {
         super.init(liveAmount: 300, expense: 100, pace: 0, projectileMovementSpeed: 0, dmgAmountProjectile: 0)
     }
     
-    override func createPlant(widthIndex: Int, lenghtIndex: Int) -> ModelEntity? {
-        return nil
+    override func createPlant(modelLoader: ModelLoader, widthIndex: Int, lenghtIndex: Int) -> ModelEntity? {
+        return super.createPlant(plant: modelLoader.returnCopyOf(plantType: .Walnut) ?? nil, widthIndex: widthIndex, lenghtIndex: lenghtIndex)
     }
     
     override func shootProjectiles(viewModel: ArViewModel) {

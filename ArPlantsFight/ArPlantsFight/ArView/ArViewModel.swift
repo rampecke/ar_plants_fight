@@ -10,7 +10,6 @@ import RealityKit
 
 @Observable
 class ArViewModel {
-    var arMode: ArMode = .AR
     let tileHeight: Float = 0.001
     let tileWidth: Float =  0.08
     var width: Int
@@ -26,6 +25,7 @@ class ArViewModel {
     var floorTiles: [[Entity]] = []
     
     var selectedPlant: PlantTypes = PlantTypes.BasicPlant
+    var modelLoader: ModelLoader = ModelLoader()
     
     init(width: Int, length: Int) {
         self.width = width
@@ -110,14 +110,6 @@ class ArViewModel {
         }
     }
     
-    func toggleArMode() {
-        if(arMode == .AR) {
-            arMode = .NonAR
-        } else {
-            arMode = .AR
-        }
-    }
-    
     func anchorWorld(arView: ARView, anchor: AnchorEntity) {
         if(!arWorldWasCreated) {
             createArWorld()
@@ -176,7 +168,7 @@ class ArViewModel {
         }
         
         if plantEntities[lenghtIndex][widthIndex] == nil {
-            guard let modelEntity = plant.createPlant(widthIndex: widthIndex, lenghtIndex: lenghtIndex) else {
+            guard let modelEntity = plant.createPlant(modelLoader: self.modelLoader, widthIndex: widthIndex, lenghtIndex: lenghtIndex) else {
                 print("Failed to create plant")
                 return
             }
@@ -192,7 +184,7 @@ class ArViewModel {
         for i in 0..<width {
             for j in 0..<length {
                 if floorTiles[i][j] == hitEntity {
-                    addPlantToPosition(widthIndex: i, lenghtIndex: j, plant: BasicPlant())
+                    addPlantToPosition(widthIndex: i, lenghtIndex: j, plant: selectedPlant == .Sunflower ? Sunflower() : BasicPlant())
                 }
             }
         }
@@ -212,11 +204,6 @@ class ArViewModel {
         modelEntity.transform.rotation = simd_quatf(angle: Float.pi / 2, axis: SIMD3<Float>(0, 1, 0))
         worldEntity.addChild(modelEntity)
     }
-}
-
-enum ArMode {
-    case AR
-    case NonAR
 }
 
 enum PlantTypes {

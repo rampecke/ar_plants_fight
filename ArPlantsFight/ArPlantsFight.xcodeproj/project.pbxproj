@@ -12,7 +12,6 @@
 		A09391072C203B3B009DF760 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A09391062C203B3B009DF760 /* Assets.xcassets */; };
 		A093910A2C203B3B009DF760 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A09391092C203B3B009DF760 /* Preview Assets.xcassets */; };
 		A09391122C203CD8009DF760 /* ArView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09391112C203CD8009DF760 /* ArView.swift */; };
-		A09391152C203D82009DF760 /* NonArView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09391142C203D82009DF760 /* NonArView.swift */; };
 		A09391172C203DEC009DF760 /* ArViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09391162C203DEC009DF760 /* ArViewModel.swift */; };
 		A093911A2C2C1711009DF760 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09391192C2C1711009DF760 /* Plant.swift */; };
 		A093911C2C2C173A009DF760 /* Sunflower.swift in Sources */ = {isa = PBXBuildFile; fileRef = A093911B2C2C173A009DF760 /* Sunflower.swift */; };
@@ -24,6 +23,7 @@
 		A099B8422C2EF14200452FD7 /* Zombie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099B8412C2EF14200452FD7 /* Zombie.swift */; };
 		A099B8442C2EF21000452FD7 /* BucketHeadZombie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099B8432C2EF21000452FD7 /* BucketHeadZombie.swift */; };
 		A099B8482C2EF54500452FD7 /* ZombieBucketHead.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A099B8472C2EF54500452FD7 /* ZombieBucketHead.usdz */; };
+		A099B84A2C3C53D700452FD7 /* ModelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099B8492C3C53D700452FD7 /* ModelLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +33,6 @@
 		A09391062C203B3B009DF760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A09391092C203B3B009DF760 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A09391112C203CD8009DF760 /* ArView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArView.swift; sourceTree = "<group>"; };
-		A09391142C203D82009DF760 /* NonArView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonArView.swift; sourceTree = "<group>"; };
 		A09391162C203DEC009DF760 /* ArViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArViewModel.swift; sourceTree = "<group>"; };
 		A09391192C2C1711009DF760 /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
 		A093911B2C2C173A009DF760 /* Sunflower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunflower.swift; sourceTree = "<group>"; };
@@ -45,6 +44,7 @@
 		A099B8412C2EF14200452FD7 /* Zombie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zombie.swift; sourceTree = "<group>"; };
 		A099B8432C2EF21000452FD7 /* BucketHeadZombie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketHeadZombie.swift; sourceTree = "<group>"; };
 		A099B8472C2EF54500452FD7 /* ZombieBucketHead.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = ZombieBucketHead.usdz; path = "../../../../../Universität/MasterSemester3/AR/Assets/UDSZ/ZombieBucketHead.usdz"; sourceTree = "<group>"; };
+		A099B8492C3C53D700452FD7 /* ModelLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,8 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				A09391112C203CD8009DF760 /* ArView.swift */,
-				A09391142C203D82009DF760 /* NonArView.swift */,
 				A09391162C203DEC009DF760 /* ArViewModel.swift */,
+				A099B8492C3C53D700452FD7 /* ModelLoader.swift */,
 			);
 			path = ArView;
 			sourceTree = "<group>";
@@ -223,12 +223,12 @@
 				A09391122C203CD8009DF760 /* ArView.swift in Sources */,
 				A09391202C2C18A2009DF760 /* BasicPlant.swift in Sources */,
 				A093911A2C2C1711009DF760 /* Plant.swift in Sources */,
+				A099B84A2C3C53D700452FD7 /* ModelLoader.swift in Sources */,
 				A093911E2C2C186E009DF760 /* Walnut.swift in Sources */,
 				A099B8442C2EF21000452FD7 /* BucketHeadZombie.swift in Sources */,
 				A09391052C203B3A009DF760 /* ContentView.swift in Sources */,
 				A093911C2C2C173A009DF760 /* Sunflower.swift in Sources */,
 				A09391032C203B3A009DF760 /* AppDelegate.swift in Sources */,
-				A09391152C203D82009DF760 /* NonArView.swift in Sources */,
 				A09391172C203DEC009DF760 /* ArViewModel.swift in Sources */,
 				A099B8422C2EF14200452FD7 /* Zombie.swift in Sources */,
 			);
