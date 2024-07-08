@@ -77,7 +77,7 @@ struct ARViewContainer: UIViewRepresentable {
                 print("Zombie hit Plant")
                 arViewModel.zombieHitPlant(zombieEntity: entityA, plantEntity: entityB, viewModel: arViewModel)
             } else if groupA == CollisionGroups.projectile && groupB == CollisionGroups.zombie {
-                arViewModel.removeEntityFromProjectiles(projectileEntity: entityA, viewModel: arViewModel)
+                arViewModel.removeEntityFromProjectiles(projectileEntity: entityA, zombieEntity: entityB, viewModel: arViewModel)
             }
         }
         

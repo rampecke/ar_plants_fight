@@ -57,7 +57,7 @@ class ArViewModel {
         }
     }
     
-    func removeEntityFromProjectiles(projectileEntity: ModelEntity, viewModel: ArViewModel) {
+    func removeEntityFromProjectiles(projectileEntity: ModelEntity, zombieEntity: ModelEntity, viewModel: ArViewModel) {
         for i in 0..<projectiles.count {
             if let index = projectiles[i].firstIndex(of: projectileEntity) {
                 projectiles[i].remove(at: index)
@@ -71,6 +71,19 @@ class ArViewModel {
             }
         } else {
             print("projectileEntity has no parent or not the expected parent, cannot remove")
+        }
+        
+        for i in 0..<zombieEntities.count {
+            if let index = zombieEntities[i].firstIndex(where: {$0.zombieEntity == zombieEntity}) {
+                let zombie = zombieEntities[i][index]
+                zombie.liveAmount = zombie.liveAmount - 25
+                if (zombie.liveAmount <= 0) {
+                    zombieEntities[i].remove(at: index)
+                    Task {
+                        await viewModel.worldEntity.removeChild(zombieEntity)
+                    }
+                }
+            }
         }
     }
     
