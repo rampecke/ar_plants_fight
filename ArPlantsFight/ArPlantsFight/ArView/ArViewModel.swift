@@ -25,6 +25,8 @@ class ArViewModel {
     var projectiles: [[Entity]] = []
     var floorTiles: [[Entity]] = []
     
+    var selectedPlant: PlantTypes = PlantTypes.BasicPlant
+    
     init(width: Int, length: Int) {
         self.width = width
         self.length = length
@@ -43,7 +45,7 @@ class ArViewModel {
         
         spawnZombieAtLane(laneNumber: 0, zombie: BucketHeadZombie())
         spawnZombieAtLane(laneNumber: 1, zombie: BucketHeadZombie())
-        spawnZombieAtLane(laneNumber: 2, zombie: BucketHeadZombie())
+        //spawnZombieAtLane(laneNumber: 2, zombie: BucketHeadZombie())
         spawnZombieAtLane(laneNumber: 3, zombie: BucketHeadZombie())
         spawnZombieAtLane(laneNumber: 4, zombie: BucketHeadZombie())
     }
@@ -53,6 +55,30 @@ class ArViewModel {
             moveZombies()
             shootPlants()
         }
+    }
+    
+    func removeEntityFromProjectiles(projectileEntity: ModelEntity, viewModel: ArViewModel) {
+//        for i in 0..<projectiles.count {
+//            if let index = projectiles[i].firstIndex(of: projectileEntity) {
+//                projectiles[i].remove(at: index)
+//                break
+//            }
+//        }
+        
+        var redMaterial = SimpleMaterial()
+        redMaterial.color = .init(tint: .red, texture: nil)
+        projectileEntity.model?.materials = [redMaterial]
+        
+        if let parent = projectileEntity.parent, parent == viewModel.worldEntity {
+            projectileEntity.stopAllAnimations()
+            print("Stoped animations")
+            //TODO: Remove the Entity -> app crashes
+        } else {
+            print("projectileEntity has no parent or not the expected parent, cannot remove")
+        }
+    }
+    
+    func zombieHitPlant(zombieEntity: ModelEntity, plantEntity: ModelEntity, viewModel: ArViewModel) {
     }
     
     private func moveZombies() {
@@ -113,8 +139,9 @@ class ArViewModel {
             for j in 0...length-1 {
                 let entity = ModelEntity(mesh: floorTileMesh, materials: [getColorFloorTile(widthIndex: i, lenghtIndex: j)])
                 entity.position = [tileWidth*Float(i),0,tileWidth*Float(j)]
-                
-                entity.components[CollisionComponent.self] = CollisionComponent(shapes: [ShapeResource.generateBox(width: tileWidth, height: tileHeight, depth: tileWidth)])
+                entity.collision = CollisionComponent(shapes: [.generateBox(size: [tileWidth, tileHeight, tileWidth])],
+                                                          mode: .default,
+                                                          filter: CollisionFilter(group: CollisionGroups.tile, mask: [.all]))
                 
                 worldEntity.addChild(entity)
                 row.append(entity)
@@ -190,4 +217,10 @@ class ArViewModel {
 enum ArMode {
     case AR
     case NonAR
+}
+
+enum PlantTypes {
+    case Sunflower
+    case Walnut
+    case BasicPlant
 }

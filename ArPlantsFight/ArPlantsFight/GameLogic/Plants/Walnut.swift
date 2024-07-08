@@ -14,7 +14,7 @@ class Walnut: Plant {
         super.init(liveAmount: 300, expense: 100, pace: 0, projectileMovementSpeed: 0, dmgAmountProjectile: 0)
     }
     
-    override func createPlant(widthIndex: Int, lenghtIndex: Int) -> Entity? {
+    override func createPlant(widthIndex: Int, lenghtIndex: Int) -> ModelEntity? {
         return nil
     }
     

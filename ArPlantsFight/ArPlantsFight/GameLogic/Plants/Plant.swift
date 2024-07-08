@@ -7,6 +7,7 @@
 
 import Foundation
 import RealityKit
+import ARKit
 
 @Observable
 class Plant {
@@ -16,7 +17,7 @@ class Plant {
     var projectileMovementSpeed: TimeInterval
     var dmgAmountProjectile: Int
     
-    var plantEntity: Entity = Entity()
+    var plantEntity: ModelEntity = ModelEntity()
     var shooting: Bool = false
     var position: (Int, Int) = (0,0)
     
@@ -37,12 +38,24 @@ class Plant {
         fatalError("This class cannot be instantiated directly")
     }
     
-    func createPlant(modelName: String, widthIndex: Int, lenghtIndex: Int) -> Entity? {
+    func createPlant(modelName: String, widthIndex: Int, lenghtIndex: Int) -> ModelEntity? {
         // Load the USDZ model
-        guard let modelEntity = try? ModelEntity.load(named: modelName) else {
+        guard let modelEntity = try? ModelEntity.loadModel(named: modelName) else {
             print("Failed to load model")
             return nil
         }
+        
+        // Get the bounding box of the model
+        let boundingBox = modelEntity.visualBounds(relativeTo: nil)
+        let plantWidth = boundingBox.extents.x
+        let plantHeight = boundingBox.extents.y
+        let plantDepth = boundingBox.extents.z
+
+        // Create a CollisionComponent and add it to the model entity
+        let collisionComponent = CollisionComponent(shapes: [.generateBox(size: [plantWidth, plantHeight, plantDepth])],
+                                                    mode: .default,
+                                                    filter: CollisionFilter(group: CollisionGroups.plant, mask: .all))
+        modelEntity.collision = collisionComponent
         
         plantEntity = modelEntity
         position = (widthIndex, lenghtIndex)
@@ -50,7 +63,7 @@ class Plant {
         return modelEntity
     }
     
-    func createPlant(widthIndex: Int, lenghtIndex: Int) -> Entity? {
+    func createPlant(widthIndex: Int, lenghtIndex: Int) -> ModelEntity? {
         fatalError("This class cannot create a plant directly")
     }
     
@@ -60,8 +73,14 @@ class Plant {
             let projectileHight: Float = 0.06
             
             projectileEntity.position = [viewModel.tileWidth*Float(self.position.0), projectileHight,viewModel.tileWidth*Float(self.position.1)]
-            viewModel.worldEntity.addChild(projectileEntity)
             
+            //Add Collision Group
+            let collisionComponent = CollisionComponent(shapes: [.generateSphere(radius: viewModel.tileWidth)],
+                                                        mode: .default,
+                                                        filter: CollisionFilter(group: CollisionGroups.projectile, mask: [.all]))
+            projectileEntity.collision = collisionComponent
+            
+            viewModel.worldEntity.addChild(projectileEntity)
             viewModel.projectiles[self.position.1].append(projectileEntity)
             
             let duration = (Double(viewModel.width) - Double(self.position.0)) * self.projectileMovementSpeed
