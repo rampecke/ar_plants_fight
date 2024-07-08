@@ -144,26 +144,28 @@ class ArViewModel {
     }
     
     func addPlantToPosition(widthIndex: Int, lenghtIndex: Int, plant: Plant) {
-        
-        //TODO: Check if the position exists
-        guard let modelEntity = plant.createPlant(widthIndex: widthIndex, lenghtIndex: lenghtIndex) else {
-            print("Failed to create plant")
+        if lenghtIndex >= plantEntities.count || widthIndex >= plantEntities[lenghtIndex].count {
             return
         }
         
-        plantEntities[lenghtIndex][widthIndex] = plant
-        
-        modelEntity.position = [tileWidth*Float(widthIndex),0+tileHeight,tileWidth*Float(lenghtIndex)]
-        worldEntity.addChild(modelEntity)
+        if plantEntities[lenghtIndex][widthIndex] == nil {
+            guard let modelEntity = plant.createPlant(widthIndex: widthIndex, lenghtIndex: lenghtIndex) else {
+                print("Failed to create plant")
+                return
+            }
+            
+            plantEntities[lenghtIndex][widthIndex] = plant
+            
+            modelEntity.position = [tileWidth*Float(widthIndex),0+tileHeight,tileWidth*Float(lenghtIndex)]
+            worldEntity.addChild(modelEntity)
+        }
     }
     
     func handleTileTap(hitEntity: Entity) {
         for i in 0..<width {
             for j in 0..<length {
                 if floorTiles[i][j] == hitEntity {
-                    if plantEntities[i][j] == nil {
-                        addPlantToPosition(widthIndex: i, lenghtIndex: j, plant: BasicPlant())
-                    }
+                    addPlantToPosition(widthIndex: i, lenghtIndex: j, plant: BasicPlant())
                 }
             }
         }
