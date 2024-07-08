@@ -58,23 +58,17 @@ class ArViewModel {
     }
     
     func removeEntityFromProjectiles(projectileEntity: ModelEntity, viewModel: ArViewModel) {
-//        for i in 0..<projectiles.count {
-//            if let index = projectiles[i].firstIndex(of: projectileEntity) {
-//                projectiles[i].remove(at: index)
-//                break
-//            }
-//        }
-        
-//        var redMaterial = SimpleMaterial()
-//        redMaterial.color = .init(tint: .red, texture: nil)
-//        projectileEntity.model?.materials = [redMaterial]
+        for i in 0..<projectiles.count {
+            if let index = projectiles[i].firstIndex(of: projectileEntity) {
+                projectiles[i].remove(at: index)
+                break
+            }
+        }
         
         if let parent = projectileEntity.parent, parent == viewModel.worldEntity {
-//            projectileEntity.stopAllAnimations()
-//            print("Stoped animations")
-            //TODO: Remove the Entity -> app crashes
-            print(viewModel.worldEntity.children.contains(projectileEntity))
-            viewModel.worldEntity.removeChild(projectileEntity)
+            Task {
+                await viewModel.worldEntity.removeChild(projectileEntity)
+            }
         } else {
             print("projectileEntity has no parent or not the expected parent, cannot remove")
         }

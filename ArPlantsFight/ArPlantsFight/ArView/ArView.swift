@@ -75,10 +75,9 @@ struct ARViewContainer: UIViewRepresentable {
             // Handle collision based on groups
             if groupA == CollisionGroups.zombie && groupB == CollisionGroups.plant {
                 print("Zombie hit Plant")
-                //arViewModel.zombieHitPlant(zombieEntity: entityA, plantEntity: entityB, viewModel: arViewModel)
+                arViewModel.zombieHitPlant(zombieEntity: entityA, plantEntity: entityB, viewModel: arViewModel)
             } else if groupA == CollisionGroups.projectile && groupB == CollisionGroups.zombie {
-                print("Projectile hit Zombie")
-                //arViewModel.removeEntityFromProjectiles(projectileEntity: entityA, viewModel: arViewModel)
+                arViewModel.removeEntityFromProjectiles(projectileEntity: entityA, viewModel: arViewModel)
             }
         }
         
