@@ -18,10 +18,12 @@ class ArViewModel {
     
     var worldEntity: Entity = Entity()
     private var arWorldWasCreated: Bool = false
+    var worldEntityWasAnchored: Bool = false
     
     var zombieEntities: [[Zombie]] = []
     var plantEntities: [[Plant?]] = []
     var projectiles: [[Entity]] = []
+    var floorTiles: [[Entity]] = []
     
     init(width: Int, length: Int) {
         self.width = width
@@ -39,27 +41,21 @@ class ArViewModel {
             }
         }
         
-        addPlantToPosition(widthIndex: 0, lenghtIndex: 0, plant: Sunflower())
-        addPlantToPosition(widthIndex: 0, lenghtIndex: 1, plant: Sunflower())
-//        addPlantToPosition(widthIndex: 0, lenghtIndex: 2, plant: BasicPlant())
-        addPlantToPosition(widthIndex: 0, lenghtIndex: 3, plant: Sunflower())
-        addPlantToPosition(widthIndex: 0, lenghtIndex: 4, plant: BasicPlant())
-        
         spawnZombieAtLane(laneNumber: 0, zombie: BucketHeadZombie())
-//        spawnZombieAtLane(laneNumber: 1, zombie: BucketHeadZombie())
-//        spawnZombieAtLane(laneNumber: 2, zombie: BucketHeadZombie())
-//        spawnZombieAtLane(laneNumber: 3, zombie: BucketHeadZombie())
-//        spawnZombieAtLane(laneNumber: 4, zombie: BucketHeadZombie())
-        checkForCollision()
+        spawnZombieAtLane(laneNumber: 1, zombie: BucketHeadZombie())
+        spawnZombieAtLane(laneNumber: 2, zombie: BucketHeadZombie())
+        spawnZombieAtLane(laneNumber: 3, zombie: BucketHeadZombie())
+        spawnZombieAtLane(laneNumber: 4, zombie: BucketHeadZombie())
     }
     
-    private func checkForCollision() {
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) {_ in
-            self.removeProjectilesThatLeftField()
+    func updateView() {
+        if self.worldEntityWasAnchored {
+            moveZombies()
+            shootPlants()
         }
     }
     
-    func moveZombies() {
+    private func moveZombies() {
         for (laneNumber, lane) in zombieEntities.enumerated() {
             lane.forEach {
                 if !$0.startedMoving {
@@ -75,14 +71,15 @@ class ArViewModel {
         }
     }
     
-    func removeProjectilesThatLeftField() {
-        for laneIndex in 0..<projectiles.count {
-            projectiles[laneIndex].removeAll { projectile in
-                if(projectile.position.x == (self.tileWidth * Float(self.width))) {
-                    self.worldEntity.removeChild(projectile)
-                    return true
+    private func shootPlants() {
+        plantEntities.forEach {
+            $0.forEach { plant in
+                if let plant = plant {
+                    if !plant.shooting {
+                        plant.shooting = true
+                        plant.shootProjectiles(viewModel: self)
+                    }
                 }
-                return false
             }
         }
     }
@@ -95,16 +92,34 @@ class ArViewModel {
         }
     }
     
+    func anchorWorld(arView: ARView, anchor: AnchorEntity) {
+        if(!arWorldWasCreated) {
+            createArWorld()
+            arWorldWasCreated = true
+            //Reposition because of Offset
+            //worldEntity.position = [-(tileWidth * Float(width)/2), 0, -(tileWidth * Float(length)/2)]
+        }
+        anchor.addChild(self.worldEntity)
+        arView.scene.addAnchor(anchor)
+        self.worldEntityWasAnchored = true
+    }
+    
     //AR Functions
     private func createArWorld() {
         let floorTileMesh = MeshResource.generateBox(width: tileWidth, height: tileHeight, depth: tileWidth)
         
         for i in 0...width-1 {
+            var row: [Entity] = []
             for j in 0...length-1 {
                 let entity = ModelEntity(mesh: floorTileMesh, materials: [getColorFloorTile(widthIndex: i, lenghtIndex: j)])
                 entity.position = [tileWidth*Float(i),0,tileWidth*Float(j)]
+                
+                entity.components[CollisionComponent.self] = CollisionComponent(shapes: [ShapeResource.generateBox(width: tileWidth, height: tileHeight, depth: tileWidth)])
+                
                 worldEntity.addChild(entity)
+                row.append(entity)
             }
+            floorTiles.append(row)
         }
     }
     
@@ -129,6 +144,7 @@ class ArViewModel {
     }
     
     func addPlantToPosition(widthIndex: Int, lenghtIndex: Int, plant: Plant) {
+        
         //TODO: Check if the position exists
         guard let modelEntity = plant.createPlant(widthIndex: widthIndex, lenghtIndex: lenghtIndex) else {
             print("Failed to create plant")
@@ -139,9 +155,18 @@ class ArViewModel {
         
         modelEntity.position = [tileWidth*Float(widthIndex),0+tileHeight,tileWidth*Float(lenghtIndex)]
         worldEntity.addChild(modelEntity)
-        
-        plant.shooting = true
-        plant.shootProjectiles(viewModel: self)
+    }
+    
+    func handleTileTap(hitEntity: Entity) {
+        for i in 0..<width {
+            for j in 0..<length {
+                if floorTiles[i][j] == hitEntity {
+                    if plantEntities[i][j] == nil {
+                        addPlantToPosition(widthIndex: i, lenghtIndex: j, plant: BasicPlant())
+                    }
+                }
+            }
+        }
     }
     
     func spawnZombieAtLane(laneNumber: Int, zombie: Zombie) {
@@ -157,17 +182,6 @@ class ArViewModel {
         modelEntity.position = [tileWidth*Float(self.width),0+tileHeight,tileWidth*Float(laneNumber)]
         modelEntity.transform.rotation = simd_quatf(angle: Float.pi / 2, axis: SIMD3<Float>(0, 1, 0))
         worldEntity.addChild(modelEntity)
-    }
-    
-    func anchorWorld(arView: ARView, anchor: AnchorEntity) {
-        if(!arWorldWasCreated) {
-            createArWorld()
-            arWorldWasCreated = true
-        }
-        //Reposition because of Offset
-        worldEntity.position = [-(tileWidth * Float(width)/2), 0, -(tileWidth * Float(length)/2)]
-        anchor.addChild(self.worldEntity)
-        arView.scene.addAnchor(anchor)
     }
 }
 

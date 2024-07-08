@@ -20,6 +20,9 @@ class Plant {
     var shooting: Bool = false
     var position: (Int, Int) = (0,0)
     
+    private final var projetileMesh = MeshResource.generateSphere(radius: 0.01)
+    private final var projetileMaterial = SimpleMaterial(color: .green, isMetallic: false)
+    
     // Internal initializer to prevent instantiation of Plant directly
     init(liveAmount: Int, expense: Int, pace: TimeInterval, projectileMovementSpeed: TimeInterval, dmgAmountProjectile: Int) {
         self.liveAmount = liveAmount
@@ -53,20 +56,29 @@ class Plant {
     
     func shootProjectiles(viewModel: ArViewModel) {
         Timer.scheduledTimer(withTimeInterval: pace, repeats: shooting) {_ in
-            let sphereMesh = MeshResource.generateSphere(radius: 0.01)
-            let sphereMaterial = SimpleMaterial(color: .green, isMetallic: false)
-            let projectileEntity = ModelEntity(mesh: sphereMesh, materials: [sphereMaterial])
+            let projectileEntity = ModelEntity(mesh: self.projetileMesh, materials: [self.projetileMaterial])
             let projectileHight: Float = 0.06
             
             projectileEntity.position = [viewModel.tileWidth*Float(self.position.0), projectileHight,viewModel.tileWidth*Float(self.position.1)]
             viewModel.worldEntity.addChild(projectileEntity)
             
             viewModel.projectiles[self.position.1].append(projectileEntity)
+            
+            let duration = (Double(viewModel.width) - Double(self.position.0)) * self.projectileMovementSpeed
+            
             projectileEntity.move(to: Transform(
                 scale: projectileEntity.transform.scale,
                 rotation: projectileEntity.transform.rotation,
                 translation: [viewModel.tileWidth * Float(viewModel.width), projectileHight, viewModel.tileWidth * Float(self.position.1)]
-            ), relativeTo: viewModel.worldEntity, duration: self.projectileMovementSpeed, timingFunction: .linear)
+            ), relativeTo: viewModel.worldEntity, duration: duration, timingFunction: .linear)
+            
+            // Use a Timer to simulate the completion handler
+            Timer.scheduledTimer(withTimeInterval: duration, repeats: false) { _ in
+                if let laneIndex = viewModel.projectiles[self.position.1].firstIndex(of: projectileEntity) {
+                    viewModel.projectiles[self.position.1].remove(at: laneIndex)
+                    viewModel.worldEntity.removeChild(projectileEntity)
+                }
+            }
         }
     }
 }

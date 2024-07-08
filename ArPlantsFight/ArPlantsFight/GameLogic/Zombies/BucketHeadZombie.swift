@@ -11,7 +11,7 @@ import RealityKit
 @Observable
 class BucketHeadZombie: Zombie{
     required init() {
-        let duration: TimeInterval = 5.0
+        let duration: TimeInterval = 35.0
         super.init(liveAmount: 100, movingPace: duration, dmgAmountHit: 25)
     }
     
