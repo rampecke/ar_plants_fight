@@ -97,7 +97,7 @@ class ArViewModel {
             createArWorld()
             arWorldWasCreated = true
             //Reposition because of Offset
-            //worldEntity.position = [-(tileWidth * Float(width)/2), 0, -(tileWidth * Float(length)/2)]
+            worldEntity.position = [-(tileWidth * Float(width)/2), 0, -(tileWidth * Float(length)/2)]
         }
         anchor.addChild(self.worldEntity)
         arView.scene.addAnchor(anchor)
