@@ -20,8 +20,11 @@ class Sunflower: Plant {
         return super.createPlant(plant: modelLoader.returnCopyOf(plantType: .Sunflower) ?? nil, widthIndex: widthIndex, lenghtIndex: lenghtIndex)
     }
     
+    override func plantDescription() -> String {
+        return "Live: \(liveAmount), Expense: \(expense), Special Ability: Generates every \(roundedString(for: pace)) \(dmgAmountProjectile) amount of money"
+    }
+    
     override func shootProjectiles(viewModel: ArViewModel) {
-        //TODO: Add money instead
         moneyTimer = Timer.scheduledTimer(withTimeInterval: pace, repeats: true) { _ in
             viewModel.money = viewModel.money + self.dmgAmountProjectile
             

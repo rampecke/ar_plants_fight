@@ -38,6 +38,15 @@ class Plant {
         fatalError("This class cannot be instantiated directly")
     }
     
+    func roundedString(for value: TimeInterval) -> String {
+        let roundedValue = (value * 2).rounded() / 2
+        return String(format: "%.1f", roundedValue)
+    }
+    
+    func plantDescription() -> String {
+        return "Live: \(liveAmount), Expense: \(expense), Damage: \(dmgAmountProjectile), Speed: \(roundedString(for: projectileMovementSpeed)), Pace: \(roundedString(for: pace))"
+    }
+    
     func createPlant(plant: ModelEntity?, widthIndex: Int, lenghtIndex: Int) -> ModelEntity? {
         guard let modelEntity = plant else {
             return nil

@@ -240,7 +240,9 @@ class ArViewModel {
     }
     
     func spawnZombieAtLane(laneNumber: Int, zombie: Zombie) {
-        //TODO: Check if the laneNumber exists
+        if zombieEntities.count <= laneNumber {
+            return
+        }
         
         guard let modelEntity = zombie.createZombie(modelLoader: self.modelLoader) else {
             print("Failed to spawn zombie")

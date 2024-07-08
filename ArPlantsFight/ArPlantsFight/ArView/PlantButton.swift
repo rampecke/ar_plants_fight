@@ -35,11 +35,6 @@ struct PlantButton: View {
         }
     }
     
-    private func roundedString(for value: TimeInterval) -> String {
-        let roundedValue = (value * 2).rounded() / 2
-        return String(format: "%.1f", roundedValue)
-    }
-    
     var body: some View {
         HStack(alignment: .center) {
             Image(returnImageName())
@@ -64,7 +59,7 @@ struct PlantButton: View {
                 )
                 HStack {
                     Group {
-                        Text("Live: \(plant.liveAmount), Expense: \(plant.expense), Damage: \(plant.dmgAmountProjectile), Speed: \(roundedString(for: plant.projectileMovementSpeed)), Pace: \(roundedString(for: plant.pace))")
+                        Text(plant.plantDescription())
                             .padding(3)
                             .foregroundColor(getColor(.onPrimary))
                             .font(.system(size: 10, weight: .semibold, design: .rounded))
@@ -88,7 +83,11 @@ struct PlantButton: View {
 }
 
 #Preview {
-    PlantButton(plantType: .BasicPlant, plant: BasicPlant(), arViewModel: ArViewModel(width: 1, length: 1))
+    @State var viewModel = ArViewModel(width: 5, length: 5)
+    return Group {
+        PlantButton(plantType: .BasicPlant, plant: BasicPlant(), arViewModel: viewModel)
+        PlantButton(plantType: .Sunflower, plant: Sunflower(), arViewModel: viewModel)
+    }
 }
 
 enum ColorEnding: String {

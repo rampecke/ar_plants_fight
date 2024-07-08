@@ -18,6 +18,10 @@ class Walnut: Plant {
         return super.createPlant(plant: modelLoader.returnCopyOf(plantType: .Walnut) ?? nil, widthIndex: widthIndex, lenghtIndex: lenghtIndex)
     }
     
+    override func plantDescription() -> String {
+        return "Live: \(liveAmount), Expense: \(expense), Special Ability: Very tanky"
+    }
+    
     override func shootProjectiles(viewModel: ArViewModel) {
         //does not shoot
     }
