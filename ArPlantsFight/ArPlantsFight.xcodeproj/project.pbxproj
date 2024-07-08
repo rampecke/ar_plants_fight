@@ -39,12 +39,12 @@
 		A093911B2C2C173A009DF760 /* Sunflower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunflower.swift; sourceTree = "<group>"; };
 		A093911D2C2C186E009DF760 /* Walnut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Walnut.swift; sourceTree = "<group>"; };
 		A093911F2C2C18A2009DF760 /* BasicPlant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicPlant.swift; sourceTree = "<group>"; };
-		A099B8382C2EA51500452FD7 /* BasePlantCM.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = BasePlantCM.usdz; path = ../../../../../Documents/BasePlantCM.usdz; sourceTree = "<group>"; };
-		A099B83A2C2EA84400452FD7 /* BasePlant.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = BasePlant.usdz; path = ../../../../../Documents/BasePlant.usdz; sourceTree = "<group>"; };
-		A099B83C2C2ED44500452FD7 /* Sunflower.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = Sunflower.usdz; path = "../../../../../Universität/MasterSemester3/AR/Assets/UDSZ/Sunflower.usdz"; sourceTree = "<group>"; };
+		A099B8382C2EA51500452FD7 /* BasePlantCM.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = BasePlantCM.usdz; sourceTree = "<group>"; };
+		A099B83A2C2EA84400452FD7 /* BasePlant.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = BasePlant.usdz; sourceTree = "<group>"; };
+		A099B83C2C2ED44500452FD7 /* Sunflower.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Sunflower.usdz; sourceTree = "<group>"; };
 		A099B8412C2EF14200452FD7 /* Zombie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zombie.swift; sourceTree = "<group>"; };
 		A099B8432C2EF21000452FD7 /* BucketHeadZombie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketHeadZombie.swift; sourceTree = "<group>"; };
-		A099B8472C2EF54500452FD7 /* ZombieBucketHead.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = ZombieBucketHead.usdz; path = "../../../../../Universität/MasterSemester3/AR/Assets/UDSZ/ZombieBucketHead.usdz"; sourceTree = "<group>"; };
+		A099B8472C2EF54500452FD7 /* ZombieBucketHead.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = ZombieBucketHead.usdz; path = ArPlantsFight/Resources/ZombieBucketHead.usdz; sourceTree = SOURCE_ROOT; };
 		A099B8492C3C53D700452FD7 /* ModelLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLoader.swift; sourceTree = "<group>"; };
 		A099B84B2C3C592400452FD7 /* PlantButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */

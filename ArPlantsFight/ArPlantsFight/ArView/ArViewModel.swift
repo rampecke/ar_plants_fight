@@ -65,14 +65,16 @@ class ArViewModel {
 //            }
 //        }
         
-        var redMaterial = SimpleMaterial()
-        redMaterial.color = .init(tint: .red, texture: nil)
-        projectileEntity.model?.materials = [redMaterial]
+//        var redMaterial = SimpleMaterial()
+//        redMaterial.color = .init(tint: .red, texture: nil)
+//        projectileEntity.model?.materials = [redMaterial]
         
         if let parent = projectileEntity.parent, parent == viewModel.worldEntity {
-            projectileEntity.stopAllAnimations()
-            print("Stoped animations")
+//            projectileEntity.stopAllAnimations()
+//            print("Stoped animations")
             //TODO: Remove the Entity -> app crashes
+            print(viewModel.worldEntity.children.contains(projectileEntity))
+            viewModel.worldEntity.removeChild(projectileEntity)
         } else {
             print("projectileEntity has no parent or not the expected parent, cannot remove")
         }
