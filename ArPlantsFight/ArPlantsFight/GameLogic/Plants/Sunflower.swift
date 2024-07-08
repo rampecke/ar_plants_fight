@@ -10,8 +10,10 @@ import RealityKit
 
 @Observable
 class Sunflower: Plant {
+    private var moneyTimer: Timer?
+    
     required init() {
-        super.init(liveAmount: 50, expense: 50, pace: 0, projectileMovementSpeed: 0, dmgAmountProjectile: 0)
+        super.init(liveAmount: 50, expense: 50, pace: 10.0, projectileMovementSpeed: 0, dmgAmountProjectile: 50)
     }
     
     override func createPlant(modelLoader: ModelLoader, widthIndex: Int, lenghtIndex: Int) -> ModelEntity? {
@@ -20,5 +22,28 @@ class Sunflower: Plant {
     
     override func shootProjectiles(viewModel: ArViewModel) {
         //TODO: Add money instead
+        moneyTimer = Timer.scheduledTimer(withTimeInterval: pace, repeats: true) { _ in
+            viewModel.money = viewModel.money + self.dmgAmountProjectile
+            
+            let textMesh = MeshResource.generateText(
+                "+\(self.dmgAmountProjectile)",
+                extrusionDepth: 0.01,
+                font: .systemFont(ofSize: 0.03),
+                containerFrame: .zero,
+                alignment: .left,
+                lineBreakMode: .byWordWrapping
+            )
+            let textMaterial = SimpleMaterial(color: .yellow, isMetallic: false)
+            let textModel = ModelEntity(mesh: textMesh, materials: [textMaterial])
+            textModel.position = [self.plantEntity.position.x, self.plantEntity.position.y + 0.1, self.plantEntity.position.z ]
+            viewModel.worldEntity.addChild(textModel)
+            Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { _ in
+                viewModel.worldEntity.removeChild(textModel)
+            }
+        }
+    }
+    
+    deinit {
+        moneyTimer?.invalidate()
     }
 }

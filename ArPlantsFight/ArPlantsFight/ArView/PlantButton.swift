@@ -10,6 +10,7 @@ import SwiftUI
 struct PlantButton: View {
     var plantType: PlantTypes
     var plant: Plant
+    var arViewModel: ArViewModel
     
     func returnImageName() -> String {
         switch plantType {
@@ -80,14 +81,14 @@ struct PlantButton: View {
         .cornerRadius(5)
         .overlay(
             RoundedRectangle(cornerRadius: 5)
-            .stroke(Color("card_border"), lineWidth: 1)
+                .stroke(arViewModel.selectedPlant == self.plantType ? Color(.red) : Color("card_border"), lineWidth: 1)
         )
         .frame(width: 300, height: 100)
     }
 }
 
 #Preview {
-    PlantButton(plantType: .BasicPlant, plant: BasicPlant())
+    PlantButton(plantType: .BasicPlant, plant: BasicPlant(), arViewModel: ArViewModel(width: 1, length: 1))
 }
 
 enum ColorEnding: String {

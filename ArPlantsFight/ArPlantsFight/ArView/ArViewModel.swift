@@ -27,6 +27,9 @@ class ArViewModel {
     var selectedPlant: PlantTypes = PlantTypes.BasicPlant
     var modelLoader: ModelLoader = ModelLoader()
     
+    var money: Int = 0
+    private var moneyTimer: Timer?
+    
     init(width: Int, length: Int) {
         self.width = width
         self.length = length
@@ -45,9 +48,43 @@ class ArViewModel {
         
         spawnZombieAtLane(laneNumber: 0, zombie: BucketHeadZombie())
         spawnZombieAtLane(laneNumber: 1, zombie: BucketHeadZombie())
-        //spawnZombieAtLane(laneNumber: 2, zombie: BucketHeadZombie())
+        spawnZombieAtLane(laneNumber: 2, zombie: BucketHeadZombie())
         spawnZombieAtLane(laneNumber: 3, zombie: BucketHeadZombie())
         spawnZombieAtLane(laneNumber: 4, zombie: BucketHeadZombie())
+        
+        startMoneyIncrement()
+    }
+    
+    func startMoneyIncrement() {
+        let textMesh = MeshResource.generateText(
+            "Money: \(money)",
+            extrusionDepth: 0.01,
+            font: .systemFont(ofSize: 0.05),
+            containerFrame: .zero,
+            alignment: .left,
+            lineBreakMode: .byWordWrapping
+        )
+        let textMaterial = SimpleMaterial(color: .black, isMetallic: false)
+        let textModel = ModelEntity(mesh: textMesh, materials: [textMaterial])
+        textModel.position = [0,0,-0.1]
+        worldEntity.addChild(textModel)
+        
+        moneyTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { _ in
+            self.money += 1
+            let textMesh = MeshResource.generateText(
+                "Money: \(self.money)",
+                extrusionDepth: 0.01,
+                font: .systemFont(ofSize: 0.05),
+                containerFrame: .zero,
+                alignment: .left,
+                lineBreakMode: .byWordWrapping
+            )
+            textModel.model?.mesh = textMesh
+        }
+    }
+        
+    deinit {
+        moneyTimer?.invalidate()
     }
     
     func updateView() {
@@ -172,20 +209,23 @@ class ArViewModel {
     }
     
     func addPlantToPosition(widthIndex: Int, lenghtIndex: Int, plant: Plant) {
-        if lenghtIndex >= plantEntities.count || widthIndex >= plantEntities[lenghtIndex].count {
-            return
-        }
-        
-        if plantEntities[lenghtIndex][widthIndex] == nil {
-            guard let modelEntity = plant.createPlant(modelLoader: self.modelLoader, widthIndex: widthIndex, lenghtIndex: lenghtIndex) else {
-                print("Failed to create plant")
+        if money >= plant.expense {
+            if lenghtIndex >= plantEntities.count || widthIndex >= plantEntities[lenghtIndex].count {
                 return
             }
             
-            plantEntities[lenghtIndex][widthIndex] = plant
-            
-            modelEntity.position = [tileWidth*Float(widthIndex),0+tileHeight,tileWidth*Float(lenghtIndex)]
-            worldEntity.addChild(modelEntity)
+            if plantEntities[lenghtIndex][widthIndex] == nil {
+                guard let modelEntity = plant.createPlant(modelLoader: self.modelLoader, widthIndex: widthIndex, lenghtIndex: lenghtIndex) else {
+                    print("Failed to create plant")
+                    return
+                }
+                
+                plantEntities[lenghtIndex][widthIndex] = plant
+                
+                modelEntity.position = [tileWidth*Float(widthIndex),0+tileHeight,tileWidth*Float(lenghtIndex)]
+                worldEntity.addChild(modelEntity)
+                money = money - plant.expense
+            }
         }
     }
     
