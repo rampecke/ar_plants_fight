@@ -24,6 +24,7 @@
 		A099B8442C2EF21000452FD7 /* BucketHeadZombie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099B8432C2EF21000452FD7 /* BucketHeadZombie.swift */; };
 		A099B8482C2EF54500452FD7 /* ZombieBucketHead.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A099B8472C2EF54500452FD7 /* ZombieBucketHead.usdz */; };
 		A099B84A2C3C53D700452FD7 /* ModelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099B8492C3C53D700452FD7 /* ModelLoader.swift */; };
+		A099B84C2C3C592400452FD7 /* PlantButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099B84B2C3C592400452FD7 /* PlantButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		A099B8432C2EF21000452FD7 /* BucketHeadZombie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketHeadZombie.swift; sourceTree = "<group>"; };
 		A099B8472C2EF54500452FD7 /* ZombieBucketHead.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = ZombieBucketHead.usdz; path = "../../../../../Universität/MasterSemester3/AR/Assets/UDSZ/ZombieBucketHead.usdz"; sourceTree = "<group>"; };
 		A099B8492C3C53D700452FD7 /* ModelLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLoader.swift; sourceTree = "<group>"; };
+		A099B84B2C3C592400452FD7 /* PlantButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				A09391112C203CD8009DF760 /* ArView.swift */,
 				A09391162C203DEC009DF760 /* ArViewModel.swift */,
 				A099B8492C3C53D700452FD7 /* ModelLoader.swift */,
+				A099B84B2C3C592400452FD7 /* PlantButton.swift */,
 			);
 			path = ArView;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 				A093911E2C2C186E009DF760 /* Walnut.swift in Sources */,
 				A099B8442C2EF21000452FD7 /* BucketHeadZombie.swift in Sources */,
 				A09391052C203B3A009DF760 /* ContentView.swift in Sources */,
+				A099B84C2C3C592400452FD7 /* PlantButton.swift in Sources */,
 				A093911C2C2C173A009DF760 /* Sunflower.swift in Sources */,
 				A09391032C203B3A009DF760 /* AppDelegate.swift in Sources */,
 				A09391172C203DEC009DF760 /* ArViewModel.swift in Sources */,

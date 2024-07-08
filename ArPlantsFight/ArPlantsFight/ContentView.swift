@@ -17,10 +17,10 @@ struct ContentView : View {
             ScrollView(.horizontal){
                 HStack{
                     Button(action: {arViewModel.selectedPlant = .BasicPlant}, label: {
-                        Text("BasicPlant")
+                        PlantButton(plantType: .BasicPlant, plant: BasicPlant())
                     })
                     Button(action: {arViewModel.selectedPlant = .Sunflower}, label: {
-                        Text("Sunflower")
+                        PlantButton(plantType: .Sunflower, plant: Sunflower())
                     })
                 }
             }
