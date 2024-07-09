@@ -45,14 +45,6 @@ class ArViewModel {
                 plantEntities[i].append(nil)
             }
         }
-        
-        spawnZombieAtLane(laneNumber: 0, zombie: BucketHeadZombie())
-        spawnZombieAtLane(laneNumber: 1, zombie: BucketHeadZombie())
-        spawnZombieAtLane(laneNumber: 2, zombie: BucketHeadZombie())
-        spawnZombieAtLane(laneNumber: 3, zombie: BucketHeadZombie())
-        spawnZombieAtLane(laneNumber: 4, zombie: BucketHeadZombie())
-        
-        startMoneyIncrement()
     }
     
     func startMoneyIncrement() {
@@ -125,6 +117,38 @@ class ArViewModel {
     }
     
     func zombieHitPlant(zombieEntity: ModelEntity, plantEntity: ModelEntity, viewModel: ArViewModel) {
+        let currentPosition = zombieEntity.position
+        zombieEntity.stopAllAnimations()
+        zombieEntity.position = currentPosition
+        
+        for i in 0..<zombieEntities.count {
+            if let index = zombieEntities[i].firstIndex(where: {$0.zombieEntity == zombieEntity}) {
+                let zombie = zombieEntities[i][index]
+                
+                if let plantIndex = viewModel.plantEntities[i].firstIndex(where: { $0?.plantEntity == plantEntity }) {
+                    guard let plant = viewModel.plantEntities[i][plantIndex] else {return}
+                    
+                    var goIntoLoop = plant.liveAmount > 0
+                    
+                    Timer.scheduledTimer(withTimeInterval: zombie.hittingPace, repeats: goIntoLoop) { _ in
+                        plant.liveAmount = plant.liveAmount - zombie.dmgAmountHit
+                        if plant.liveAmount <= 0 {
+                            viewModel.plantEntities[i][plantIndex] = nil
+                            viewModel.worldEntity.removeChild(plantEntity)
+                            plant.shooting = false
+                            goIntoLoop = false
+                            
+                            let duration = (Double(plant.position.0)) * zombie.movingPace
+                            zombieEntity.move(to: Transform(
+                                scale: zombieEntity.transform.scale,
+                                rotation: zombieEntity.transform.rotation,
+                                translation: [0, self.tileHeight, self.tileWidth * Float(i)]
+                            ), relativeTo: self.worldEntity, duration: duration, timingFunction: .linear)
+                        }
+                    }
+                }
+            }
+        }
     }
     
     private func moveZombies() {
@@ -133,11 +157,12 @@ class ArViewModel {
                 if !$0.startedMoving {
                     let zombieEntity = $0.zombieEntity
                     $0.startedMoving = true
+                    let duration = (Double(self.width)) * $0.movingPace
                     zombieEntity.move(to: Transform(
                         scale: zombieEntity.transform.scale,
                         rotation: zombieEntity.transform.rotation,
                         translation: [0, tileHeight, tileWidth * Float(laneNumber)]
-                    ), relativeTo: worldEntity, duration: $0.movingPace, timingFunction: .linear)
+                    ), relativeTo: worldEntity, duration: duration, timingFunction: .linear)
                 }
             }
         }
@@ -186,6 +211,14 @@ class ArViewModel {
             }
             floorTiles.append(row)
         }
+        
+        spawnZombieAtLane(laneNumber: 0, zombie: BucketHeadZombie())
+        spawnZombieAtLane(laneNumber: 1, zombie: BucketHeadZombie())
+        spawnZombieAtLane(laneNumber: 2, zombie: BucketHeadZombie())
+        spawnZombieAtLane(laneNumber: 3, zombie: BucketHeadZombie())
+        spawnZombieAtLane(laneNumber: 4, zombie: BucketHeadZombie())
+        
+        startMoneyIncrement()
     }
     
     

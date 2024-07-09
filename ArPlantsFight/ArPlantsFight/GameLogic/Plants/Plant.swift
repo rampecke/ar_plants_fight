@@ -51,15 +51,9 @@ class Plant {
         guard let modelEntity = plant else {
             return nil
         }
-        
-        // Get the bounding box of the model
-        let boundingBox = modelEntity.visualBounds(relativeTo: nil)
-        let plantWidth = boundingBox.extents.x
-        let plantHeight = boundingBox.extents.y
-        let plantDepth = boundingBox.extents.z
 
         // Create a CollisionComponent and add it to the model entity
-        let collisionComponent = CollisionComponent(shapes: [.generateBox(size: [plantWidth, plantHeight, plantDepth])],
+        let collisionComponent = CollisionComponent(shapes: [.generateBox(size: [50, 200, 50])],
                                                     mode: .default,
                                                     filter: CollisionFilter(group: CollisionGroups.plant, mask: .all))
         modelEntity.collision = collisionComponent
@@ -82,7 +76,7 @@ class Plant {
             projectileEntity.position = [viewModel.tileWidth*Float(self.position.0), projectileHight,viewModel.tileWidth*Float(self.position.1)]
             
             //Add Collision Group
-            let collisionComponent = CollisionComponent(shapes: [.generateSphere(radius: viewModel.tileWidth)],
+            let collisionComponent = CollisionComponent(shapes: [.generateSphere(radius: 0.015)],
                                                         mode: .default,
                                                         filter: CollisionFilter(group: CollisionGroups.projectile, mask: [.all]))
             projectileEntity.collision = collisionComponent

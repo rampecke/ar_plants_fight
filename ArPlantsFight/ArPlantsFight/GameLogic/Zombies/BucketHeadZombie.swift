@@ -11,11 +11,11 @@ import RealityKit
 @Observable
 class BucketHeadZombie: Zombie{
     required init() {
-        let duration: TimeInterval = 35.0
-        super.init(liveAmount: 100, movingPace: duration, dmgAmountHit: 25)
+        let duration: TimeInterval = 5.0
+        super.init(liveAmount: 100, movingPace: duration, dmgAmountHit: 25, hittingPace: 2.0)
     }
     
-    override func createZombie(modelLoader: ModelLoader) -> Entity? {
+    override func createZombie(modelLoader: ModelLoader) -> ModelEntity? {
         return super.createZombie(zombie: modelLoader.returnCopyOf(zombieType: .BucketHeadZombie))
     }
 }

@@ -13,15 +13,17 @@ class Zombie {
     var liveAmount: Int
     var movingPace: TimeInterval
     var dmgAmountHit: Int
+    var hittingPace: TimeInterval
     var startedMoving: Bool = false
     
     var zombieEntity: ModelEntity = ModelEntity()
     
     // Internal initializer to prevent instantiation of Plant directly
-    init(liveAmount: Int, movingPace: TimeInterval, dmgAmountHit: Int) {
+    init(liveAmount: Int, movingPace: TimeInterval, dmgAmountHit: Int, hittingPace: TimeInterval) {
         self.liveAmount = liveAmount
         self.movingPace = movingPace
         self.dmgAmountHit = dmgAmountHit
+        self.hittingPace = hittingPace
     }
     
     // Required initializer to ensure subclasses implement their own initializers
@@ -35,15 +37,9 @@ class Zombie {
             print("Failed to load model")
             return nil
         }
-        
-        // Get the bounding box of the model
-        let boundingBox = modelEntity.visualBounds(relativeTo: nil)
-        let zombieWidth = boundingBox.extents.x
-        let zombieHeight = boundingBox.extents.y
-        let zombieDepth = boundingBox.extents.z
 
         // Create a CollisionComponent and add it to the model entity
-        let collisionComponent = CollisionComponent(shapes: [.generateBox(size: [zombieWidth, zombieHeight, zombieDepth])],
+        let collisionComponent = CollisionComponent(shapes: [.generateBox(size: [50, 200, 50])],
                                                     mode: .default,
                                                     filter: CollisionFilter(group: CollisionGroups.zombie, mask: .all))
         modelEntity.collision = collisionComponent
@@ -53,7 +49,7 @@ class Zombie {
         return modelEntity
     }
     
-    func createZombie(modelLoader: ModelLoader) -> Entity? {
+    func createZombie(modelLoader: ModelLoader) -> ModelEntity? {
         fatalError("This class cannot create a plant directly")
     }
 }

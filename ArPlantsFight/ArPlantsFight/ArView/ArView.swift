@@ -70,11 +70,8 @@ struct ARViewContainer: UIViewRepresentable {
             let groupA = entityA.collision?.filter.group
             let groupB = entityB.collision?.filter.group
             
-            //print("GroupA is: \(groupA == CollisionGroups.tile ? "Tile": groupA == CollisionGroups.projectile ? "Projectile" : groupA == CollisionGroups.plant ? "Plant" : groupA == CollisionGroups.zombie ? "Zombie" : "None") and GroupB is: \(groupB == CollisionGroups.tile ? "Tile": groupB == CollisionGroups.projectile ? "Projectile" : groupB == CollisionGroups.plant ? "Plant" : groupB == CollisionGroups.zombie ? "Zombie" : "None")")
-            
             // Handle collision based on groups
             if groupA == CollisionGroups.zombie && groupB == CollisionGroups.plant {
-                print("Zombie hit Plant")
                 arViewModel.zombieHitPlant(zombieEntity: entityA, plantEntity: entityB, viewModel: arViewModel)
             } else if groupA == CollisionGroups.projectile && groupB == CollisionGroups.zombie {
                 arViewModel.removeEntityFromProjectiles(projectileEntity: entityA, zombieEntity: entityB, viewModel: arViewModel)
