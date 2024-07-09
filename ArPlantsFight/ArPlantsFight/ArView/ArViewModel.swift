@@ -107,6 +107,7 @@ class ArViewModel {
                 let zombie = zombieEntities[i][index]
                 zombie.liveAmount = zombie.liveAmount - 25
                 if (zombie.liveAmount <= 0) {
+                    zombie.timer?.invalidate()
                     zombieEntities[i].remove(at: index)
                     Task {
                         await viewModel.worldEntity.removeChild(zombieEntity)
@@ -130,13 +131,14 @@ class ArViewModel {
                     
                     var goIntoLoop = plant.liveAmount > 0
                     
-                    Timer.scheduledTimer(withTimeInterval: zombie.hittingPace, repeats: goIntoLoop) { _ in
+                    zombie.timer = Timer.scheduledTimer(withTimeInterval: zombie.hittingPace, repeats: goIntoLoop) { _ in
                         plant.liveAmount = plant.liveAmount - zombie.dmgAmountHit
                         if plant.liveAmount <= 0 {
                             viewModel.plantEntities[i][plantIndex] = nil
                             viewModel.worldEntity.removeChild(plantEntity)
                             plant.shooting = false
                             goIntoLoop = false
+                            plant.timer?.invalidate()
                             
                             let duration = (Double(plant.position.0)) * zombie.movingPace
                             zombieEntity.move(to: Transform(

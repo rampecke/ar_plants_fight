@@ -25,7 +25,7 @@ class Sunflower: Plant {
     }
     
     override func shootProjectiles(viewModel: ArViewModel) {
-        moneyTimer = Timer.scheduledTimer(withTimeInterval: pace, repeats: shooting) { _ in
+        self.timer = Timer.scheduledTimer(withTimeInterval: pace, repeats: shooting) { _ in
             viewModel.money = viewModel.money + self.dmgAmountProjectile
             
             let textMesh = MeshResource.generateText(

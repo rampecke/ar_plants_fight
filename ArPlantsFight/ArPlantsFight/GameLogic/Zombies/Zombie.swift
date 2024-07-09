@@ -17,6 +17,7 @@ class Zombie {
     var startedMoving: Bool = false
     
     var zombieEntity: ModelEntity = ModelEntity()
+    var timer: Timer?
     
     // Internal initializer to prevent instantiation of Plant directly
     init(liveAmount: Int, movingPace: TimeInterval, dmgAmountHit: Int, hittingPace: TimeInterval) {
@@ -24,6 +25,10 @@ class Zombie {
         self.movingPace = movingPace
         self.dmgAmountHit = dmgAmountHit
         self.hittingPace = hittingPace
+    }
+    
+    deinit {
+        timer?.invalidate()
     }
     
     // Required initializer to ensure subclasses implement their own initializers

@@ -23,6 +23,7 @@ class Plant {
     
     private final var projetileMesh = MeshResource.generateSphere(radius: 0.01)
     private final var projetileMaterial = SimpleMaterial(color: .green, isMetallic: false)
+    var timer: Timer?
     
     // Internal initializer to prevent instantiation of Plant directly
     init(liveAmount: Int, expense: Int, pace: TimeInterval, projectileMovementSpeed: TimeInterval, dmgAmountProjectile: Int) {
@@ -31,6 +32,10 @@ class Plant {
         self.pace = pace
         self.projectileMovementSpeed = projectileMovementSpeed
         self.dmgAmountProjectile = dmgAmountProjectile
+    }
+    
+    deinit {
+        timer?.invalidate()
     }
     
     // Required initializer to ensure subclasses implement their own initializers
@@ -69,7 +74,7 @@ class Plant {
     }
     
     func shootProjectiles(viewModel: ArViewModel) {
-        Timer.scheduledTimer(withTimeInterval: pace, repeats: shooting) {_ in
+        timer = Timer.scheduledTimer(withTimeInterval: pace, repeats: shooting) {_ in
             let projectileEntity = ModelEntity(mesh: self.projetileMesh, materials: [self.projetileMaterial])
             let projectileHight: Float = 0.06
             
