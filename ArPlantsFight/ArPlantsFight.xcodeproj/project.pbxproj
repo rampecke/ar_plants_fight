@@ -26,6 +26,7 @@
 		A099B84A2C3C53D700452FD7 /* ModelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099B8492C3C53D700452FD7 /* ModelLoader.swift */; };
 		A099B84C2C3C592400452FD7 /* PlantButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099B84B2C3C592400452FD7 /* PlantButton.swift */; };
 		A099B84E2C3D1B0D00452FD7 /* Walnut.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A099B84D2C3D1B0D00452FD7 /* Walnut.usdz */; };
+		A099B8522C3D246000452FD7 /* LevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099B8512C3D246000452FD7 /* LevelView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		A099B8492C3C53D700452FD7 /* ModelLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLoader.swift; sourceTree = "<group>"; };
 		A099B84B2C3C592400452FD7 /* PlantButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantButton.swift; sourceTree = "<group>"; };
 		A099B84D2C3D1B0D00452FD7 /* Walnut.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Walnut.usdz; sourceTree = "<group>"; };
+		A099B8512C3D246000452FD7 /* LevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				A09391042C203B3A009DF760 /* ContentView.swift */,
 				A09391062C203B3B009DF760 /* Assets.xcassets */,
 				A09391082C203B3B009DF760 /* Preview Content */,
+				A099B8512C3D246000452FD7 /* LevelView.swift */,
 			);
 			path = ArPlantsFight;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				A093911A2C2C1711009DF760 /* Plant.swift in Sources */,
 				A099B84A2C3C53D700452FD7 /* ModelLoader.swift in Sources */,
 				A093911E2C2C186E009DF760 /* Walnut.swift in Sources */,
+				A099B8522C3D246000452FD7 /* LevelView.swift in Sources */,
 				A099B8442C2EF21000452FD7 /* BucketHeadZombie.swift in Sources */,
 				A09391052C203B3A009DF760 /* ContentView.swift in Sources */,
 				A099B84C2C3C592400452FD7 /* PlantButton.swift in Sources */,
