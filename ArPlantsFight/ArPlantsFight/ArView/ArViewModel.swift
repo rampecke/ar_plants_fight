@@ -193,6 +193,8 @@ class ArViewModel {
         anchor.addChild(self.worldEntity)
         arView.scene.addAnchor(anchor)
         self.worldEntityWasAnchored = true
+        
+        startMoneyIncrement()
     }
     
     //AR Functions
@@ -214,13 +216,26 @@ class ArViewModel {
             floorTiles.append(row)
         }
         
-        spawnZombieAtLane(laneNumber: 0, zombie: BucketHeadZombie())
-        spawnZombieAtLane(laneNumber: 1, zombie: BucketHeadZombie())
-        spawnZombieAtLane(laneNumber: 2, zombie: BucketHeadZombie())
-        spawnZombieAtLane(laneNumber: 3, zombie: BucketHeadZombie())
-        spawnZombieAtLane(laneNumber: 4, zombie: BucketHeadZombie())
         
-        startMoneyIncrement()
+        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { _ in
+            self.spawnZombieAtLane(laneNumber: 1, zombie: BucketHeadZombie())
+        }
+        Timer.scheduledTimer(withTimeInterval: 10.0, repeats: false) { _ in
+            self.spawnZombieAtLane(laneNumber: 3, zombie: BucketHeadZombie())
+        }
+        Timer.scheduledTimer(withTimeInterval: 20.0, repeats: false) { _ in
+            self.spawnZombieAtLane(laneNumber: 3, zombie: BucketHeadZombie())
+        }
+        
+        Timer.scheduledTimer(withTimeInterval: 30.0, repeats: false) { _ in
+            self.spawnZombieAtLane(laneNumber: 3, zombie: BucketHeadZombie())
+        }
+
+        //spawnZombieAtLane(laneNumber: 0, zombie: BucketHeadZombie())
+        //spawnZombieAtLane(laneNumber: 1, zombie: BucketHeadZombie())
+        //spawnZombieAtLane(laneNumber: 2, zombie: BucketHeadZombie())
+        //spawnZombieAtLane(laneNumber: 3, zombie: BucketHeadZombie())
+        //spawnZombieAtLane(laneNumber: 4, zombie: BucketHeadZombie())
     }
     
     
