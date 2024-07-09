@@ -12,8 +12,20 @@
 		A09391072C203B3B009DF760 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A09391062C203B3B009DF760 /* Assets.xcassets */; };
 		A093910A2C203B3B009DF760 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A09391092C203B3B009DF760 /* Preview Assets.xcassets */; };
 		A09391122C203CD8009DF760 /* ArView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09391112C203CD8009DF760 /* ArView.swift */; };
-		A09391152C203D82009DF760 /* NonArView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09391142C203D82009DF760 /* NonArView.swift */; };
 		A09391172C203DEC009DF760 /* ArViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09391162C203DEC009DF760 /* ArViewModel.swift */; };
+		A093911A2C2C1711009DF760 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09391192C2C1711009DF760 /* Plant.swift */; };
+		A093911C2C2C173A009DF760 /* Sunflower.swift in Sources */ = {isa = PBXBuildFile; fileRef = A093911B2C2C173A009DF760 /* Sunflower.swift */; };
+		A093911E2C2C186E009DF760 /* Walnut.swift in Sources */ = {isa = PBXBuildFile; fileRef = A093911D2C2C186E009DF760 /* Walnut.swift */; };
+		A09391202C2C18A2009DF760 /* BasicPlant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A093911F2C2C18A2009DF760 /* BasicPlant.swift */; };
+		A099B8392C2EA51500452FD7 /* BasePlantCM.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A099B8382C2EA51500452FD7 /* BasePlantCM.usdz */; };
+		A099B83B2C2EA84400452FD7 /* BasePlant.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A099B83A2C2EA84400452FD7 /* BasePlant.usdz */; };
+		A099B83D2C2ED44500452FD7 /* Sunflower.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A099B83C2C2ED44500452FD7 /* Sunflower.usdz */; };
+		A099B8422C2EF14200452FD7 /* Zombie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099B8412C2EF14200452FD7 /* Zombie.swift */; };
+		A099B8442C2EF21000452FD7 /* BucketHeadZombie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099B8432C2EF21000452FD7 /* BucketHeadZombie.swift */; };
+		A099B8482C2EF54500452FD7 /* ZombieBucketHead.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A099B8472C2EF54500452FD7 /* ZombieBucketHead.usdz */; };
+		A099B84A2C3C53D700452FD7 /* ModelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099B8492C3C53D700452FD7 /* ModelLoader.swift */; };
+		A099B84C2C3C592400452FD7 /* PlantButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099B84B2C3C592400452FD7 /* PlantButton.swift */; };
+		A099B84E2C3D1B0D00452FD7 /* Walnut.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A099B84D2C3D1B0D00452FD7 /* Walnut.usdz */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,8 +35,20 @@
 		A09391062C203B3B009DF760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A09391092C203B3B009DF760 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A09391112C203CD8009DF760 /* ArView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArView.swift; sourceTree = "<group>"; };
-		A09391142C203D82009DF760 /* NonArView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonArView.swift; sourceTree = "<group>"; };
 		A09391162C203DEC009DF760 /* ArViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArViewModel.swift; sourceTree = "<group>"; };
+		A09391192C2C1711009DF760 /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
+		A093911B2C2C173A009DF760 /* Sunflower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunflower.swift; sourceTree = "<group>"; };
+		A093911D2C2C186E009DF760 /* Walnut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Walnut.swift; sourceTree = "<group>"; };
+		A093911F2C2C18A2009DF760 /* BasicPlant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicPlant.swift; sourceTree = "<group>"; };
+		A099B8382C2EA51500452FD7 /* BasePlantCM.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = BasePlantCM.usdz; sourceTree = "<group>"; };
+		A099B83A2C2EA84400452FD7 /* BasePlant.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = BasePlant.usdz; sourceTree = "<group>"; };
+		A099B83C2C2ED44500452FD7 /* Sunflower.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Sunflower.usdz; sourceTree = "<group>"; };
+		A099B8412C2EF14200452FD7 /* Zombie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zombie.swift; sourceTree = "<group>"; };
+		A099B8432C2EF21000452FD7 /* BucketHeadZombie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketHeadZombie.swift; sourceTree = "<group>"; };
+		A099B8472C2EF54500452FD7 /* ZombieBucketHead.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = ZombieBucketHead.usdz; path = ArPlantsFight/Resources/ZombieBucketHead.usdz; sourceTree = SOURCE_ROOT; };
+		A099B8492C3C53D700452FD7 /* ModelLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLoader.swift; sourceTree = "<group>"; };
+		A099B84B2C3C592400452FD7 /* PlantButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantButton.swift; sourceTree = "<group>"; };
+		A099B84D2C3D1B0D00452FD7 /* Walnut.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Walnut.usdz; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +81,8 @@
 		A09391012C203B3A009DF760 /* ArPlantsFight */ = {
 			isa = PBXGroup;
 			children = (
-				A09391132C203D43009DF760 /* WorldLogic */,
+				A099B8372C2EA4F300452FD7 /* Resources */,
+				A09391132C203D43009DF760 /* GameLogic */,
 				A09391102C203C33009DF760 /* ArView */,
 				A09391022C203B3A009DF760 /* AppDelegate.swift */,
 				A09391042C203B3A009DF760 /* ContentView.swift */,
@@ -79,17 +104,52 @@
 			isa = PBXGroup;
 			children = (
 				A09391112C203CD8009DF760 /* ArView.swift */,
-				A09391142C203D82009DF760 /* NonArView.swift */,
 				A09391162C203DEC009DF760 /* ArViewModel.swift */,
+				A099B8492C3C53D700452FD7 /* ModelLoader.swift */,
+				A099B84B2C3C592400452FD7 /* PlantButton.swift */,
 			);
 			path = ArView;
 			sourceTree = "<group>";
 		};
-		A09391132C203D43009DF760 /* WorldLogic */ = {
+		A09391132C203D43009DF760 /* GameLogic */ = {
 			isa = PBXGroup;
 			children = (
+				A099B8402C2EF12E00452FD7 /* Zombies */,
+				A09391182C2C16E4009DF760 /* Plants */,
 			);
-			path = WorldLogic;
+			path = GameLogic;
+			sourceTree = "<group>";
+		};
+		A09391182C2C16E4009DF760 /* Plants */ = {
+			isa = PBXGroup;
+			children = (
+				A09391192C2C1711009DF760 /* Plant.swift */,
+				A093911B2C2C173A009DF760 /* Sunflower.swift */,
+				A093911D2C2C186E009DF760 /* Walnut.swift */,
+				A093911F2C2C18A2009DF760 /* BasicPlant.swift */,
+			);
+			path = Plants;
+			sourceTree = "<group>";
+		};
+		A099B8372C2EA4F300452FD7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A099B8472C2EF54500452FD7 /* ZombieBucketHead.usdz */,
+				A099B83C2C2ED44500452FD7 /* Sunflower.usdz */,
+				A099B83A2C2EA84400452FD7 /* BasePlant.usdz */,
+				A099B8382C2EA51500452FD7 /* BasePlantCM.usdz */,
+				A099B84D2C3D1B0D00452FD7 /* Walnut.usdz */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A099B8402C2EF12E00452FD7 /* Zombies */ = {
+			isa = PBXGroup;
+			children = (
+				A099B8412C2EF14200452FD7 /* Zombie.swift */,
+				A099B8432C2EF21000452FD7 /* BucketHeadZombie.swift */,
+			);
+			path = Zombies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,6 +210,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A099B83D2C2ED44500452FD7 /* Sunflower.usdz in Resources */,
+				A099B8392C2EA51500452FD7 /* BasePlantCM.usdz in Resources */,
+				A099B83B2C2EA84400452FD7 /* BasePlant.usdz in Resources */,
+				A099B84E2C3D1B0D00452FD7 /* Walnut.usdz in Resources */,
+				A099B8482C2EF54500452FD7 /* ZombieBucketHead.usdz in Resources */,
 				A093910A2C203B3B009DF760 /* Preview Assets.xcassets in Resources */,
 				A09391072C203B3B009DF760 /* Assets.xcassets in Resources */,
 			);
@@ -163,10 +228,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				A09391122C203CD8009DF760 /* ArView.swift in Sources */,
+				A09391202C2C18A2009DF760 /* BasicPlant.swift in Sources */,
+				A093911A2C2C1711009DF760 /* Plant.swift in Sources */,
+				A099B84A2C3C53D700452FD7 /* ModelLoader.swift in Sources */,
+				A093911E2C2C186E009DF760 /* Walnut.swift in Sources */,
+				A099B8442C2EF21000452FD7 /* BucketHeadZombie.swift in Sources */,
 				A09391052C203B3A009DF760 /* ContentView.swift in Sources */,
+				A099B84C2C3C592400452FD7 /* PlantButton.swift in Sources */,
+				A093911C2C2C173A009DF760 /* Sunflower.swift in Sources */,
 				A09391032C203B3A009DF760 /* AppDelegate.swift in Sources */,
-				A09391152C203D82009DF760 /* NonArView.swift in Sources */,
 				A09391172C203DEC009DF760 /* ArViewModel.swift in Sources */,
+				A099B8422C2EF14200452FD7 /* Zombie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,12 +382,13 @@
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ramonaeckert.ArPlantsFight;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ramonaeckert.ArPlantsFights;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -341,12 +414,13 @@
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ramonaeckert.ArPlantsFight;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ramonaeckert.ArPlantsFights;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
