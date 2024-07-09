@@ -268,7 +268,7 @@ class ArViewModel {
         for i in 0..<width {
             for j in 0..<length {
                 if floorTiles[i][j] == hitEntity {
-                    addPlantToPosition(widthIndex: i, lenghtIndex: j, plant: selectedPlant == .Sunflower ? Sunflower() : BasicPlant())
+                    addPlantToPosition(widthIndex: i, lenghtIndex: j, plant: selectedPlant == .Sunflower ? Sunflower() : selectedPlant == .Walnut ? Walnut() : BasicPlant())
                 }
             }
         }

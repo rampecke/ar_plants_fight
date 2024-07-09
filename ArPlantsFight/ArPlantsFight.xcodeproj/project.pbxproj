@@ -25,6 +25,7 @@
 		A099B8482C2EF54500452FD7 /* ZombieBucketHead.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A099B8472C2EF54500452FD7 /* ZombieBucketHead.usdz */; };
 		A099B84A2C3C53D700452FD7 /* ModelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099B8492C3C53D700452FD7 /* ModelLoader.swift */; };
 		A099B84C2C3C592400452FD7 /* PlantButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099B84B2C3C592400452FD7 /* PlantButton.swift */; };
+		A099B84E2C3D1B0D00452FD7 /* Walnut.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A099B84D2C3D1B0D00452FD7 /* Walnut.usdz */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		A099B8472C2EF54500452FD7 /* ZombieBucketHead.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = ZombieBucketHead.usdz; path = ArPlantsFight/Resources/ZombieBucketHead.usdz; sourceTree = SOURCE_ROOT; };
 		A099B8492C3C53D700452FD7 /* ModelLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLoader.swift; sourceTree = "<group>"; };
 		A099B84B2C3C592400452FD7 /* PlantButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantButton.swift; sourceTree = "<group>"; };
+		A099B84D2C3D1B0D00452FD7 /* Walnut.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Walnut.usdz; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 				A099B83C2C2ED44500452FD7 /* Sunflower.usdz */,
 				A099B83A2C2EA84400452FD7 /* BasePlant.usdz */,
 				A099B8382C2EA51500452FD7 /* BasePlantCM.usdz */,
+				A099B84D2C3D1B0D00452FD7 /* Walnut.usdz */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 				A099B83D2C2ED44500452FD7 /* Sunflower.usdz in Resources */,
 				A099B8392C2EA51500452FD7 /* BasePlantCM.usdz in Resources */,
 				A099B83B2C2EA84400452FD7 /* BasePlant.usdz in Resources */,
+				A099B84E2C3D1B0D00452FD7 /* Walnut.usdz in Resources */,
 				A099B8482C2EF54500452FD7 /* ZombieBucketHead.usdz in Resources */,
 				A093910A2C203B3B009DF760 /* Preview Assets.xcassets in Resources */,
 				A09391072C203B3B009DF760 /* Assets.xcassets in Resources */,

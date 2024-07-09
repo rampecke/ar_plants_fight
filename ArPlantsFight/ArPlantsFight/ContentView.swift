@@ -22,6 +22,9 @@ struct ContentView : View {
                     Button(action: {arViewModel.selectedPlant = .Sunflower}, label: {
                         PlantButton(plantType: .Sunflower, plant: Sunflower(), arViewModel: arViewModel)
                     })
+                    Button(action: {arViewModel.selectedPlant = .Walnut}, label: {
+                        PlantButton(plantType: .Walnut, plant: Walnut(), arViewModel: arViewModel)
+                    })
                 }
             }
         }.padding(5)
