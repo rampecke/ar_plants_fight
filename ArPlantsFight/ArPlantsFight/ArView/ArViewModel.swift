@@ -30,9 +30,13 @@ class ArViewModel {
     var money: Int = 0
     private var moneyTimer: Timer?
     
-    init(width: Int, length: Int) {
+    var zombieSpawnPattern: [((Double, Int), ZombieTypes)] 
+    //= [((2,1),ZombieTypes.BucketHeadZombie),((10,3),ZombieTypes.BucketHeadZombie),((20,3),ZombieTypes.BucketHeadZombie),((30,3),ZombieTypes.BucketHeadZombie)]
+    
+    init(width: Int, length: Int, zombieSpawnPattern: [((Double, Int), ZombieTypes)]) {
         self.width = width
         self.length = length
+        self.zombieSpawnPattern = zombieSpawnPattern
         
         for _ in 0..<length {
             zombieEntities.append([])
@@ -144,7 +148,7 @@ class ArViewModel {
                             zombieEntity.move(to: Transform(
                                 scale: zombieEntity.transform.scale,
                                 rotation: zombieEntity.transform.rotation,
-                                translation: [0, self.tileHeight, self.tileWidth * Float(i)]
+                                translation: [0 - self.tileWidth, self.tileHeight, self.tileWidth * Float(i)]
                             ), relativeTo: self.worldEntity, duration: duration, timingFunction: .linear)
                         }
                     }
@@ -163,7 +167,7 @@ class ArViewModel {
                     zombieEntity.move(to: Transform(
                         scale: zombieEntity.transform.scale,
                         rotation: zombieEntity.transform.rotation,
-                        translation: [0, tileHeight, tileWidth * Float(laneNumber)]
+                        translation: [0 - tileWidth, tileHeight, tileWidth * Float(laneNumber)]
                     ), relativeTo: worldEntity, duration: duration, timingFunction: .linear)
                 }
             }
@@ -216,26 +220,13 @@ class ArViewModel {
             floorTiles.append(row)
         }
         
-        
-        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { _ in
-            self.spawnZombieAtLane(laneNumber: 1, zombie: BucketHeadZombie())
+        //Spawn Zombies in the spawn pattern defined for the Level -> Each Zombie spawns with a delay of timeInt at lane
+        zombieSpawnPattern.forEach { patternInstance in
+            let ((timeInt, lane), type) = patternInstance
+            Timer.scheduledTimer(withTimeInterval: timeInt, repeats: false) { _ in
+                self.spawnZombieAtLane(laneNumber: lane, zombie: type == ZombieTypes.BucketHeadZombie ? BucketHeadZombie() : Zombie())
+            }
         }
-        Timer.scheduledTimer(withTimeInterval: 10.0, repeats: false) { _ in
-            self.spawnZombieAtLane(laneNumber: 3, zombie: BucketHeadZombie())
-        }
-        Timer.scheduledTimer(withTimeInterval: 20.0, repeats: false) { _ in
-            self.spawnZombieAtLane(laneNumber: 3, zombie: BucketHeadZombie())
-        }
-        
-        Timer.scheduledTimer(withTimeInterval: 30.0, repeats: false) { _ in
-            self.spawnZombieAtLane(laneNumber: 3, zombie: BucketHeadZombie())
-        }
-
-        //spawnZombieAtLane(laneNumber: 0, zombie: BucketHeadZombie())
-        //spawnZombieAtLane(laneNumber: 1, zombie: BucketHeadZombie())
-        //spawnZombieAtLane(laneNumber: 2, zombie: BucketHeadZombie())
-        //spawnZombieAtLane(laneNumber: 3, zombie: BucketHeadZombie())
-        //spawnZombieAtLane(laneNumber: 4, zombie: BucketHeadZombie())
     }
     
     

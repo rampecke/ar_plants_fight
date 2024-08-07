@@ -83,7 +83,7 @@ struct PlantButton: View {
 }
 
 #Preview {
-    @State var viewModel = ArViewModel(width: 5, length: 5)
+    @State var viewModel = ArViewModel(width: 5, length: 5, zombieSpawnPattern: [])
     return Group {
         PlantButton(plantType: .BasicPlant, plant: BasicPlant(), arViewModel: viewModel)
         PlantButton(plantType: .Sunflower, plant: Sunflower(), arViewModel: viewModel)

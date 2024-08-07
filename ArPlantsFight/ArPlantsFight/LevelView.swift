@@ -29,7 +29,7 @@ struct LevelView: View {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))], spacing: 20) {
                     ForEach(1...totalLevels, id: \.self) { level in
                         if level <= currentLevel {
-                            NavigationLink(destination: ContentView()) {
+                            NavigationLink(destination: GameView(levelNumber: level)) {
                                 Text("LVL \(level)")
                                     .font(.title)
                                     .frame(width: 100, height: 100)
