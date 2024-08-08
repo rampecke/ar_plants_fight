@@ -30,8 +30,9 @@ class ArViewModel {
     var money: Int = 0
     private var moneyTimer: Timer?
     
-    var zombieSpawnPattern: [((Double, Int), ZombieTypes)] 
-    //= [((2,1),ZombieTypes.BucketHeadZombie),((10,3),ZombieTypes.BucketHeadZombie),((20,3),ZombieTypes.BucketHeadZombie),((30,3),ZombieTypes.BucketHeadZombie)]
+    var zombieSpawnPattern: [((Double, Int), ZombieTypes)]
+    var killCounter: Int = 0
+    var gameLost = false
     
     init(width: Int, length: Int, zombieSpawnPattern: [((Double, Int), ZombieTypes)]) {
         self.width = width
@@ -49,6 +50,11 @@ class ArViewModel {
                 plantEntities[i].append(nil)
             }
         }
+    }
+    
+    func endArGame() {
+        moneyTimer?.invalidate()
+        money = 0
     }
     
     func startMoneyIncrement() {
@@ -116,6 +122,8 @@ class ArViewModel {
                     Task {
                         await viewModel.worldEntity.removeChild(zombieEntity)
                     }
+                    //Zombie was killed
+                    killCounter += 1
                 }
             }
         }
@@ -219,6 +227,14 @@ class ArViewModel {
             }
             floorTiles.append(row)
         }
+        
+        //Add collision component that detects a zombie leaving the field
+        let invisibleEntity = ModelEntity()
+        invisibleEntity.collision = CollisionComponent(shapes: [.generateBox(size: [0.01, 0.3, tileWidth*Float(length)])],
+                                                  mode: .default,
+                                                       filter: CollisionFilter(group: CollisionGroups.goalWall, mask: [.all]))
+        invisibleEntity.position = [0-tileWidth,0,(tileWidth*Float(length)/2)-tileWidth/2]
+        worldEntity.addChild(invisibleEntity)
         
         //Spawn Zombies in the spawn pattern defined for the Level -> Each Zombie spawns with a delay of timeInt at lane
         zombieSpawnPattern.forEach { patternInstance in

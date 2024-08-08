@@ -43,6 +43,10 @@ struct ARViewContainer: UIViewRepresentable {
     
     func updateUIView(_ uiView: ARView, context: Context) {
         arViewModel.updateView()
+        
+        if arViewModel.killCounter == arViewModel.zombieSpawnPattern.count {
+            //Remove the timers for the plants
+        }
     }
     
     func makeCoordinator() -> Coordinator {
@@ -75,6 +79,8 @@ struct ARViewContainer: UIViewRepresentable {
                 arViewModel.zombieHitPlant(zombieEntity: entityA, plantEntity: entityB, viewModel: arViewModel)
             } else if groupA == CollisionGroups.projectile && groupB == CollisionGroups.zombie {
                 arViewModel.removeEntityFromProjectiles(projectileEntity: entityA, zombieEntity: entityB, viewModel: arViewModel)
+            } else if groupA == CollisionGroups.zombie && groupB == CollisionGroups.goalWall {
+                arViewModel.gameLost = true
             }
         }
         
@@ -107,4 +113,5 @@ struct CollisionGroups {
     static let plant = CollisionGroup(rawValue: 1 << 1)
     static let zombie = CollisionGroup(rawValue: 1 << 2)
     static let projectile = CollisionGroup(rawValue: 1 << 3)
+    static let goalWall = CollisionGroup(rawValue: 1 << 4)
 }
