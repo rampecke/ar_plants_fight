@@ -37,13 +37,13 @@ class Zombie {
     }
     
     func createZombie(zombie: ModelEntity?) -> ModelEntity? {
-        // Load the USDZ model
+        // The USDZ model was preloaded -> check if it exits
         guard let modelEntity = zombie else {
             print("Failed to load model")
             return nil
         }
 
-        // Create a CollisionComponent and add it to the model entity
+        // Create a CollisionComponent and add it to the model entity -> CollisionGroup zombie to destinguish between the diffrent instances
         let collisionComponent = CollisionComponent(shapes: [.generateBox(size: [50, 200, 50])],
                                                     mode: .default,
                                                     filter: CollisionFilter(group: CollisionGroups.zombie, mask: .all))

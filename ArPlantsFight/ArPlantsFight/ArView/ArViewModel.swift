@@ -8,6 +8,7 @@
 import Foundation
 import RealityKit
 
+//All logic connected to the ARView
 @Observable
 class ArViewModel {
     let tileHeight: Float = 0.001
@@ -57,6 +58,7 @@ class ArViewModel {
         money = 0
     }
     
+    //Create the Money counter and update the moneycount
     func startMoneyIncrement() {
         let textMesh = MeshResource.generateText(
             "Money: \(money)",
@@ -89,6 +91,7 @@ class ArViewModel {
         moneyTimer?.invalidate()
     }
     
+    //Delegate function for the arView -> Check if all zombies are moving and the plants shooting
     func updateView() {
         if self.worldEntityWasAnchored {
             moveZombies()
@@ -96,6 +99,7 @@ class ArViewModel {
         }
     }
     
+    //Remove any projectile that left the field and didn't collide with a zombie
     func removeEntityFromProjectiles(projectileEntity: ModelEntity, zombieEntity: ModelEntity, viewModel: ArViewModel) {
         for i in 0..<projectiles.count {
             if let index = projectiles[i].firstIndex(of: projectileEntity) {
@@ -129,6 +133,7 @@ class ArViewModel {
         }
     }
     
+    //Logic for a zombie colling with a plant
     func zombieHitPlant(zombieEntity: ModelEntity, plantEntity: ModelEntity, viewModel: ArViewModel) {
         let currentPosition = zombieEntity.position
         zombieEntity.stopAllAnimations()
@@ -165,6 +170,7 @@ class ArViewModel {
         }
     }
     
+    //create a movement translation to let the zombie move
     private func moveZombies() {
         for (laneNumber, lane) in zombieEntities.enumerated() {
             lane.forEach {
@@ -182,6 +188,7 @@ class ArViewModel {
         }
     }
     
+    //Call the shooting function of each plant that is not shooting
     private func shootPlants() {
         plantEntities.forEach {
             $0.forEach { plant in
@@ -195,6 +202,7 @@ class ArViewModel {
         }
     }
     
+    //Since we created the Ar world in the viewModel we need a function to anchor it to aor ARView
     func anchorWorld(arView: ARView, anchor: AnchorEntity) {
         if(!arWorldWasCreated) {
             createArWorld()
@@ -209,7 +217,7 @@ class ArViewModel {
         startMoneyIncrement()
     }
     
-    //AR Functions
+    //AR Function to create the World
     private func createArWorld() {
         let floorTileMesh = MeshResource.generateBox(width: tileWidth, height: tileHeight, depth: tileWidth)
         
@@ -265,6 +273,7 @@ class ArViewModel {
         }
     }
     
+    //Canculate the position of the plant and place it in the world
     func addPlantToPosition(widthIndex: Int, lenghtIndex: Int, plant: Plant) {
         if money >= plant.expense {
             if lenghtIndex >= plantEntities.count || widthIndex >= plantEntities[lenghtIndex].count {
@@ -286,6 +295,7 @@ class ArViewModel {
         }
     }
     
+    //Get the position of the tile we need to add our plant to
     func handleTileTap(hitEntity: Entity) {
         for i in 0..<width {
             for j in 0..<length {
@@ -296,6 +306,7 @@ class ArViewModel {
         }
     }
     
+    //Spawn new Zombies
     func spawnZombieAtLane(laneNumber: Int, zombie: Zombie) {
         if zombieEntities.count <= laneNumber {
             return

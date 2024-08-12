@@ -22,6 +22,7 @@ class Walnut: Plant {
         return "Live: \(liveAmount), Expense: \(expense), Special Ability: Very tanky"
     }
     
+    //Does not shoot but is very tanky
     override func shootProjectiles(viewModel: ArViewModel) {
         //does not shoot
     }

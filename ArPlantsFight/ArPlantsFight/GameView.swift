@@ -8,6 +8,7 @@
 import SwiftUI
 import RealityKit
 
+//ARView with the plant buttons -> Select the spwan pattern for selected level
 struct GameView : View {
     @State var arViewModel: ArViewModel
     var levelNumber: Int

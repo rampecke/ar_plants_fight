@@ -41,12 +41,9 @@ struct ARViewContainer: UIViewRepresentable {
         return arView
     }
     
+    //Gets called whenever there is a change on the variables of the arViewModel
     func updateUIView(_ uiView: ARView, context: Context) {
         arViewModel.updateView()
-        
-        if arViewModel.killCounter == arViewModel.zombieSpawnPattern.count {
-            //Remove the timers for the plants
-        }
     }
     
     func makeCoordinator() -> Coordinator {
@@ -61,12 +58,14 @@ struct ARViewContainer: UIViewRepresentable {
             self.arViewModel = arViewModel
         }
         
+        //Make sure every collision gets detected
         func setupCollisionSubscriptions(in arView: ARView) {
             arView.scene.subscribe(to: CollisionEvents.Began.self) { event in
                 self.handleCollision(event: event)
             }.store(in: &subscriptions)
         }
         
+        //Handle the collision of all the groups and call the according function in the viewmodel
         func handleCollision(event: CollisionEvents.Began) {
             guard let entityA = event.entityA as? ModelEntity,
                   let entityB = event.entityB as? ModelEntity else { return }
@@ -84,6 +83,7 @@ struct ARViewContainer: UIViewRepresentable {
             }
         }
         
+        //Use the hit result function of arkit to detect which tile was tabbed -> with collisionGroups we can detect if it was a tile
         @objc func handleTap(_ sender: UITapGestureRecognizer) {
             guard let arView = sender.view as? ARView else { return }
             let location = sender.location(in: arView)

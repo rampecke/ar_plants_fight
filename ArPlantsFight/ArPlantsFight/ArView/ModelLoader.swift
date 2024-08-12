@@ -9,6 +9,7 @@ import Foundation
 import RealityKit
 import ARKit
 
+//Class to preload the modles -> else there would be a delay when spawning plants or zombies
 class ModelLoader {
     private var sunflowerModel: ModelEntity?
     private var basicModel: ModelEntity?

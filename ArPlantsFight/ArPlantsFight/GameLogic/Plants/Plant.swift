@@ -73,6 +73,7 @@ class Plant {
         fatalError("This class cannot create a plant directly")
     }
     
+    // Function so that plants can shoot at a specific pace, default is a green pea, but this can be overwritten in the classes below by setting the properties or overwritting the function completly
     func shootProjectiles(viewModel: ArViewModel) {
         timer = Timer.scheduledTimer(withTimeInterval: pace, repeats: shooting) {_ in
             let projectileEntity = ModelEntity(mesh: self.projetileMesh, materials: [self.projetileMaterial])

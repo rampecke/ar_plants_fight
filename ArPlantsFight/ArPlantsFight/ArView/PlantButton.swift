@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//Button for selecting the plant
 struct PlantButton: View {
     var plantType: PlantTypes
     var plant: Plant

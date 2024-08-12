@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//Only unlock the levels that are complete
 struct LevelView: View {
     @State private var currentLevel: Int = UserDefaults.standard.integer(forKey: "currentLevel")
     private let totalLevels = 5

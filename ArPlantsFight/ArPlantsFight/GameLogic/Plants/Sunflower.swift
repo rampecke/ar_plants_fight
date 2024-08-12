@@ -24,6 +24,7 @@ class Sunflower: Plant {
         return "Live: \(liveAmount), Expense: \(expense), Special Ability: Generates every \(roundedString(for: pace)) \(dmgAmountProjectile) amount of money"
     }
     
+    //Instead of shooting peas sunflowers generate money, we need to render a text above the plant that shows when money was generated
     override func shootProjectiles(viewModel: ArViewModel) {
         self.timer = Timer.scheduledTimer(withTimeInterval: pace, repeats: shooting) { _ in
             viewModel.money = viewModel.money + self.dmgAmountProjectile
